@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>🎸 Live sehen — Bandliste</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0a;--card:#151515;--accent:#e63946;--green:#2ecc71;--text:#f1faee;--muted:#555}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;padding-bottom:40px}
+header{text-align:center;padding:44px 20px 28px;background:linear-gradient(180deg,#1a0808,var(--bg))}
+h1{font-size:2.2rem;font-weight:800;letter-spacing:-1px}
+h1 span{color:var(--accent)}
+header p{color:var(--muted);margin-top:6px;font-size:.88rem}
+.st{display:flex;justify-content:center;gap:28px;margin-top:18px}
+.st div{text-align:center}.st .nm{font-size:1.8rem;font-weight:700}
+.st .nm.w{color:var(--accent)}.st .nm.s{color:var(--green)}
+.st .lb{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-top:2px}
+.fl{display:flex;justify-content:center;gap:8px;margin:20px 0 4px;flex-wrap:wrap}
+.fl button{background:var(--card);border:1px solid #333;color:var(--text);padding:7px 16px;border-radius:20px;cursor:pointer;font-size:.82rem;transition:all .2s}
+.fl button.on{background:var(--accent);border-color:var(--accent)}
+.fl button:hover{border-color:var(--accent)}
+.sec{max-width:1100px;margin:28px auto 10px;padding:0 16px;font-size:1rem;font-weight:700;display:flex;align-items:center;gap:8px}
+.sec em{color:var(--accent);font-style:normal}.sec .c{color:var(--muted);font-weight:400;font-size:.82rem}
+.g{max-width:1100px;margin:0 auto;padding:0 12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
+.card{background:var(--card);border-radius:12px;overflow:hidden;border:1px solid #222;transition:all .2s;cursor:pointer}
+.card:hover{border-color:#444;transform:translateY(-1px)}
+.card.seen{cursor:default}.card.seen:hover{transform:none}
+.card.seen .n{opacity:.5;text-decoration:line-through;text-decoration-color:var(--accent)}
+.card.seen .gen{opacity:.4}.card.seen .av{opacity:.5}
+.card.playing{border-color:var(--accent)}
+.top{display:flex;align-items:center;gap:12px;padding:12px 14px;position:relative}
+.av{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:700;flex-shrink:0;overflow:hidden;color:rgba(255,255,255,.7)}
+.av.sm{width:40px;height:40px}
+.av img{width:100%;height:100%;object-fit:cover}
+.inf{flex:1;min-width:0}
+.n{font-weight:700;font-size:.92rem}
+.gen{color:var(--muted);font-size:.72rem;margin-top:1px}
+.trk{color:var(--accent);font-size:.7rem;margin-top:3px;opacity:.8}
+.badge{position:absolute;top:6px;right:8px;font-size:.58rem;padding:2px 7px;border-radius:8px;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.badge.w{background:var(--accent);color:#fff}.badge.d{background:var(--green);color:#000}
+.bar{height:3px;background:#222;margin:0 14px 10px}.prog{height:100%;width:0;background:var(--accent);border-radius:2px;transition:width .1s}
+@media(max-width:640px){.g{grid-template-columns:1fr}h1{font-size:1.6rem}.st .nm{font-size:1.4rem}}
+</style>
+</head>
+<body>
+<header>
+<h1>🎸 <span>Live</span> sehen</h1>
+<p>Bands die ich noch live sehen will</p>
+<div class="st">
+<div><div class="nm w">23</div><div class="lb">Will sehen</div></div>
+<div><div class="nm s">37</div><div class="lb">Gesehen ✓</div></div>
+<div><div class="nm">60</div><div class="lb">Gesamt</div></div>
+</div>
+</header>
+<div class="fl">
+<button class="on" onclick="fi('all',this)">Alle</button>
+<button onclick="fi('want',this)">🎯 Will sehen</button>
+<button onclick="fi('seen',this)">✓ Gesehen</button>
+</div>
+<div class="sec" id="ws"><em>🎯</em> Will ich noch live sehen <span class="c">(23)</span></div>
+<div class="g" id="wg"><div class="card" onclick="play(this)" data-preview="https://cdnt-preview.dzcdn.net/api/1/1/d/a/d/0/dadb3be2d9603ee41f870a48c28a7dfe.mp3?hdnea=exp=1774306218~acl=/api/1/1/d/a/d/0/dadb3be2d9603ee41f870a48c28a7dfe.mp3*~data=user_id=0,application_id=42~hmac=c32cdfa6640fa84451e23e599f516f232db6187918807e841dd91f4b9e48c340">
+<div class="top"><div class="av" ><img src="https://cdn-images.dzcdn.net/images/artist/66c0ba3f9c8c9a5ce3aef1f6a3883f4b/250x250-000000-80-0-0.jpg" alt="Jack Pott" loading="lazy"></div>
+<div class="inf"><div class="n">Jack Pott</div><div class="gen">Punk</div>
+<div class="trk">♫ Alle meine Freunde (Version 2022)</div></div>
+<span class="badge w">🎯</span></div>
+<div class="bar"><div class="prog" id="p-Jack-Pott"></div></div>
+</div>
+<div class="card" onclick="play(this)" data-preview="https://cdnt-preview.dzcdn.net/api/1/1/f/e/0/0/fe06385090a4037f0fc3fef4f6499c55.mp3?hdnea=exp=1774306218~acl=/api/1/1/f/e/0/0/fe06385090a4037f0fc3fef4f6499c55.mp3*~data=user_id=0,application_id=42~hmac=3f89c9953be1e0183299bc2b1e7017f427181ef9e8d24a78e4eaf641a5e05c66">
+<div class="top"><div class="av" ><img src="https://cdn-images.dzcdn.net/images/artist/ab3526a996738e1b856d4f14a5263744/250x250-000000-80-0-0.jpg" alt="Zirkel" loading="lazy"></div>
+<div class="inf"><div class="n">Zirkel</div><div class="gen">Deutschrap</div>
+<div class="trk">♫ Jahr Für Jahr</div></div>
+<span class="badge w">🎯</span></div>
+<div class="bar"><div class="prog" id="p-Zirkel"></div></div>
+</div>
+<div class="card" onclick="play(this)" data-preview="https://cdnt-preview.dzcdn.net/api/1/1/d/1/a/0/d1a866ef0c7a22173bcb29810d09837c.mp3?hdnea=exp=1774306219~acl=/api/1/1/d/1/a/0/d1a866ef0c7a22173bcb29810d09837c.mp3*~data=user_id=0,application_id=42~hmac=febb2500b3b7d678d1a6e0b624e978086a245221b717c0848f1dec9f8d1ecc6b">
+<div class="top"><div class="av" ><img src="https://cdn-images.dzcdn.net/images/artist/a0b7d78a77735ea168e1f4d3f4a64c96/250x250-000000-80-0-0.jpg" alt="Casper" loading="lazy"></div>
+<div class="inf"><div class="n">Casper</div><div class="gen">Deutschrap/Rock</div>
+<div class="trk">♫ sommer (feat. CRO)</div></div>
+<span class="badge w">🎯</span></div>
+<div class="bar"><div class="prog" id="p-Casper"></div></div>
+</div>
+<div class="card" onclick="play(this)" data-preview="https://cdnt-preview.dzcdn.net/api/1/1/a/5/3/0/a53ef9de581f1fb916e6ccafddff3416.mp3?hdnea=exp=1774306220~acl=/api/1/1/a/5/3/0/a53ef9de581f1fb916e6ccafddff3416.mp3*~data=user_id=0,application_id=42~hmac=647d763a8ebb33b58b96ab32f507584bfe4cd3054e36878ac32b14644910cf45">
+<div class="top"><div class="av" ><img src="https://cdn-images.dzcdn.net/images/artist/2cfe48ee31420dc4e7686e7c3c845417/250x250-000000-80-0-0.jpg" alt="Broilers" loading="lazy"></div>
+<div class="inf"><div class="n">Broilers</div><div class="gen">Punk Rock</div>
+<div class="trk">♫ Ist da jemand?</div></div>
+<span class="badge w">🎯</span></div>
+<div class="bar"><div class="prog" id="p-Broilers"></div></div>
+</div>
+<div class="card" onclick="play(this)" data-preview="https://cdnt-preview.dzcdn.net/api/1/1/b/2/8/0/b284af0914d9b09521e81d8b44f7230d.mp3?hdnea=exp=1774306221~acl=/api/1/1/b/2/8/0/b284af0914d9b09521e81d8b44f7230d.mp3*~data=user_id=0,application_id=42~hmac=d2963e7a2548b500e52d8bf12a3df976e642814aae01893297ba97e5ff21f136">
+<div class="top"><div class="av" ><img src="https://cdn-images.dzcdn.net/images/artist/aeb524667bf6897e9bcf70d46cd41759/250x250-000000-80-0-0.jpg" alt="Antifuchs" loading="lazy"></div>
+<div class="inf"><div class="n">Antifuchs</div><div class="gen">Deutschrap</div>
+<div class="trk">♫ Alexa Alexa Antifascista</div></div>
+<span class="badge w">🎯</span></div>
+<div class="bar"><div class="prog" id="p-Antifuchs"></div></div>
+</div>
+<div class="card" onclick="play(this)" data-preview="https://cdnt-preview.dzcdn.net/api/1/1/e/b/7/0/eb7972ca743d77753171420e15c90d48.mp3?hdnea=exp=1774306221~acl=/api/1/1/e/b/7/0/eb7972ca743d77753171420e15c90d48.mp3*~data=user_id=0,application_id=42~hmac=031cf66563525bcc6118264db54ee541da37abf1e70a5f87a887147a5bdddc21">
+<div class="top"><div class="av" ><img src="https://cdn-images.dzcdn.net/images/artist/f30bf029459eedbcb4dd7cbc2a35a968/250x250-000000-80-0-0.jpg" alt="OK KID" loading="lazy"></div>
+<div class="inf"><div class="n">OK KID</div><div class="gen">Indie/Electro</div>
+<div class="trk">♫ Rave On</div></div>
+<span class="badge w">🎯</span></div>
+<div class="bar"><div class="prog" id="p-OK-KID"></div></div>
+</div>
+<div class="card" onclick="play(this)" data-preview="https://cdnt-preview.dzcdn.net/api/1/1/f/1/a/0/f1ab5f45e10298bb0d2f637eaea67e06.mp3?hdnea=exp=1774306222~acl=/api/1/1/f/1/a/0/f1ab5f45e10298bb0d2f637eaea67e06.mp3*~data=user_id=0,application_id=42~hmac=12ede59f4c8aac403234d059921bee9b4ea1cb9ce3e80dcd568404c06fb91276">
+<div class="top"><div class="av" ><img src="https://cdn-images.dzcdn.net/images/artist/3d6efd55377baa6322530e103da6d164/250x250-000000-80-0-0.jpg" alt="WON WELT" loading="lazy"></div>
+<div class="inf"><div class="n">WON WELT</div><div class="gen">Rap</div>
+<div class="trk">♫ Ain't No Sunshine</div></div>
+<span class="badge w">🎯</span></div>
+<div class="bar"><div class="prog" id="p-WON-WELT"></div></div>
+</div>
+<div class="card" onclick="play(this)" data-preview="https://cdnt-preview.dzcdn.net/api/1/1/4/0/7/0/407f6081b3edf378de47dddb75762919.mp3?hdnea=exp=1774306222~acl=/api/1/1/4/0/7/0/407f6081b3edf378de47dddb75762919.mp3*~data=user_id=0,application_id=42~hmac=eb95e2c3068904103a573a4534f088bbc4ad6513c2550572739b9cfe032d6a79">
+<div class="top"><div class="av" ><img src="https://cdn-images.dzcdn.net/images/artist/5225599dc93353934d42feb3d6c67f60/250x250-000000-80-0-0.jpg" alt="Liedfett" loading="lazy"></div>
+<div class="inf"><div class="n">Liedfett</div><div class="gen">Punk/Ska</div>
+<div class="trk">♫ Kommst du mit?</div></div>
+<span class="badge w">🎯</span></div>
+<div class="bar"><div class="prog" id="p-Liedfett"></div></div>
+</div>
+<div class="card" onclick="play(this)" data-preview="https://cdnt-preview.dzcdn.net/api/1/1/7/a/b/0/7ab5275b3815eac820918cc7affe132f.mp3?hdnea=exp=1774306223~acl=/api/1/1/7/a/b/0/7ab5275b3815eac820918cc7affe132f.mp3*~data=user_id=0,application_id=42~hmac=261f1970defed01068a6b015811df54171796986f1b3164384aff601b6cb64e4">
+<div class="top"><div class="av" ><img src="https://cdn-images.dzcdn.net/images/artist/3e0c7da89fc461b44f0a5e72be69d8d0/250x250-000000-80-0-0.jpg" alt="Deichkind" loading="lazy"></div>
+<div class="inf"><div class="n">Deichkind</div><div class="gen">Electro/Hip-Hop</div>
+<div class="trk">♫ Zeit aus dem Fenster</div></div>
+<span class="badge w">🎯</span></div>
+<div class="bar"><div class="prog" id="p-Deichkind"></div></div>
+</div>
+<div class="card" onclick="play(this)" data-preview="https://cdnt-preview.dzcdn.net/api/1/1/5/8/6/0/5860cfb1921744ab8ce7dbcb3ca60d74.mp3?hdnea=exp=1774306224~acl=/api/1/1/5/8/6/0/5860cfb1921744ab8ce7dbcb3ca60d74.mp3*~data=user_id=0,application_id=42~hmac=54c3326ef1b11de19ae813a5df504a873ca44735a6bf6d4d242d37ebb866b0d3">
+<div class="top"><div class="av" ><img src="https://cdn-images.dzcdn.net/images/artist/88d539e6a46c2fe9c76ea6800174e8a5/250x250-000000-80-0-0.jpg" alt="Haller" loading="lazy"></div>
+<div class="inf"><div class="n">Haller</div><div class="gen">Indie</div>
+<div class="trk">♫ Bisschen Liebe</div></div>
+<span class="badge w">🎯</span></div>
+<div class="bar"><div class="prog" id="p-Haller"></div></div>
+</div>
+<div class="card" onclick="play(this)" data-preview="https://cdnt-preview.dzcdn.net/api/1/1/f/5/7/0/f5719849e50128e100159af8d7ba6417.mp3?hdnea=exp=1774306224~acl=/api/1/1/f/5/7/0/f5719849e50128e100159af8d7ba6417.mp3*~data=user_id=0,application_id=42~hmac=b01f60d3192b5ceb4d5699d565ae1ac29b0617f38734d342895e6b649d8353f0">
+<div class="top"><div class="av" ><img src="https://cdn-images.dzcdn.net/images/artist/b72967bf4b539d8d45fd6d717742c54d/250x250-000000-80-0-0.jpg" alt="Feine Sahne Fischfilet" loading="lazy"></div>
+<div class="inf"><div class="n">Feine Sahne Fischfilet</div><div class="gen">Punk</div>
+<div class="trk">♫ Komplett im Arsch</div></div>
+<span class="badge w">🎯</span></div>
+<div class="bar"><div class="prog" id="p-Feine-Sahne-Fischfilet"></div></div>
+</div>
+<div class="card" onclick="play(this)" data-preview="https://cdnt-preview.dzcdn.net/api/1/1/d/c/8/0/dc8b1f95fa77344e32af399c149294c3.mp3?hdnea=exp=1774306225~acl=/api/1/1/d/c/8/0/dc8b1f95fa77344e32af399c149294c3.mp3*~data=user_id=0,application_id=42~hmac=44b3b035e6fef1c96f9cfff219cc2e701ced1f72284d225c8bb3f1a7b3243e53">
+<div class="top"><div class="av" ><img src="https://cdn-images.dzcdn.net/images/artist/c7a29cd8b233d9e147cc0537846292b1/250x250-000000-80-0-0.jpg" alt="JEREMIAS" loading="lazy"></div>
+<div class="inf"><div class="n">JEREMIAS</div><div class="gen">Indie Pop</div>
+<div class="trk">♫ meer</div></div>
+<span class="badge w">🎯</span></div>
+<div class="bar"><div class="prog" id="p-JEREMIAS"></div></div>
+</div>
+<div class="card" onclick="play(this)" data-preview="https://cdnt-preview.dzcdn.net/api/1/1/f/f/6/0/ff61c7c322105c2ea05fcf5ebf48c477.mp3?hdnea=exp=1774306225~acl=/api/1/1/f/f/6/0/ff61c7c322105c2ea05fcf5ebf48c477.mp3*~data=user_id=0,application_id=42~hmac=4cb1f9a1628e74abacc5351d27d085896488f1af98942fea60cc2cd87589e355">
+<div class="top"><div class="av" ><img src="https://cdn-images.dzcdn.net/images/artist/dadcb094b958da3ffe930b447b4405ad/250x250-000000-80-0-0.jpg" alt="Rogers" loading="lazy"></div>
+<div class="inf"><div class="n">Rogers</div><div class="gen">Punk Rock</div>
+<div class="trk">♫ Mittelfinger für immer</div></div>
+<span class="badge w">🎯</span></div>
+<div class="bar"><div class="prog" id="p-Rogers"></div></div>
+</div>
+<div class="card" onclick="play(this)" data-preview="https://cdnt-preview.dzcdn.net/api/1/1/9/b/3/0/9b3b33fa47f00eb43729de30e8027afa.mp3?hdnea=exp=1774306226~acl=/api/1/1/9/b/3/0/9b3b33fa47f00eb43729de30e8027afa.mp3*~data=user_id=0,application_id=42~hmac=93f7b6bf8211f68b99af7bfe04024431423b5f5f8e330a212022acbf522d7bd7">
+<div class="top"><div class="av" ><img src="https://cdn-images.dzcdn.net/images/artist/4886905210739af3438990897bad3a98/250x250-000000-80-0-0.jpg" alt="Linkin Park" loading="lazy"></div>
+<div class="inf"><div class="n">Linkin Park</div><div class="gen">Nu Metal/Rock</div>
+<div class="trk">♫ In the End</div></div>
+<span class="badge w">🎯</span></div>
+<div class="bar"><div class="prog" id="p-Linkin-Park"></div></div>
+</div>
+<div class="card" onclick="play(this)" data-preview="https://cdnt-preview.dzcdn.net/api/1/1/e/b/2/0/eb208fbe630167eb87349bd0dfa70184.mp3?hdnea=exp=1774306227~acl=/api/1/1/e/b/2/0/eb208fbe630167eb87349bd0dfa70184.mp3*~data=user_id=0,application_id=42~hmac=313e89419946597b2659142e561b86391d027b0b43fa29145e554b9bbba3bacf">
+<div class="top"><div class="av" ><img src="https://cdn-images.dzcdn.net/images/artist/1a03753615fd067ef768880ae6dc05f4/250x250-000000-80-0-0.jpg" alt="bac" loading="lazy"></div>
+<div class="inf"><div class="n">bac</div><div class="gen">Punk</div>
+<div class="trk">♫ Rosaroter Tee</div></div>
+<span class="badge w">🎯</span></div>
+<div class="bar"><div class="prog" id="p-bac"></div></div>
+</div>
+<div class="card" onclick="play(this)" data-preview="https://cdnt-preview.dzcdn.net/api/1/1/b/9/7/0/b9706356f7a618daf0b2cdee1300b226.mp3?hdnea=exp=1774306227~acl=/api/1/1/b/9/7/0/b9706356f7a618daf0b2cdee1300b226.mp3*~data=user_id=0,application_id=42~hmac=e93604d4006bbcb8996776f8a0c3a62441d9fad6f1809627916c2f9a3d34191b">
+<div class="top"><div class="av" ><img src="https://cdn-images.dzcdn.net/images/artist/ca9d8beeec00711509dda496875174ee/250x250-000000-80-0-0.jpg" alt="Bruchbude" loading="lazy"></div>
+<div class="inf"><div class="n">Bruchbude</div><div class="gen">Punk</div>
+<div class="trk">♫ abgefucked</div></div>
+<span class="badge w">🎯</span></div>
+<div class="bar"><div class="prog" id="p-Bruchbude"></div></div>
+</div>
+<div class="card" onclick="play(this)" data-preview="https://cdnt-preview.dzcdn.net/api/1/1/6/0/3/0/603e02451e402c70809f4ff119377369.mp3?hdnea=exp=1774306228~acl=/api/1/1/6/0/3/0/603e02451e402c70809f4ff119377369.mp3*~data=user_id=0,application_id=42~hmac=56a7118a02386cf7a541674850097a7984a9296bdd76de624138eb8c487ccf7c">
+<div class="top"><div class="av" ><img src="https://cdn-images.dzcdn.net/images/artist/782fabbc3174b6842468e1476d6d6ed9/250x250-000000-80-0-0.jpg" alt="Paula Hartmann" loading="lazy"></div>
+<div class="inf"><div class="n">Paula Hartmann</div><div class="gen">Pop/R&B</div>
+<div class="trk">♫ Gegenteil von Glück</div></div>
+<span class="badge w">🎯</span></div>
+<div class="bar"><div class="prog" id="p-Paula-Hartmann"></div></div>
+</div>
+<div class="card" onclick="play(this)" data-preview="https://cdnt-preview.dzcdn.net/api/1/1/3/0/a/0/30aab4ea51e4db816fb8c3586a582713.mp3?hdnea=exp=1774306229~acl=/api/1/1/3/0/a/0/30aab4ea51e4db816fb8c3586a582713.mp3*~data=user_id=0,application_id=42~hmac=310d28c284366e396b535a6a14e1b5a41d5026fc82fdc2b2ed9d2194cae857e9">
+<div class="top"><div class="av" ><img src="https://cdn-images.dzcdn.net/images/artist/ea7a5902fcd0127438cb2bc4b77fa782/250x250-000000-80-0-0.jpg" alt="Focus." loading="lazy"></div>
+<div class="inf"><div class="n">Focus.</div><div class="gen">Punk</div>
+<div class="trk">♫ Für immer 21</div></div>
+<span class="badge w">🎯</span></div>
+<div class="bar"><div class="prog" id="p-Focus."></div></div>
+</div>
+<div class="card" onclick="play(this)" data-preview="https://cdnt-preview.dzcdn.net/api/1/1/0/d/7/0/0d706a2aaaceb24d42a17079d95665a0.mp3?hdnea=exp=1774306229~acl=/api/1/1/0/d/7/0/0d706a2aaaceb24d42a17079d95665a0.mp3*~data=user_id=0,application_id=42~hmac=e27dab4933f245346759e11430892fab6201eb6e24ed8fef0d305f5ca3448b10">
+<div class="top"><div class="av" ><img src="https://cdn-images.dzcdn.net/images/artist/30762d00f9a4d809ef5c6fea1613f36b/250x250-000000-80-0-0.jpg" alt="Freude" loading="lazy"></div>
+<div class="inf"><div class="n">Freude</div><div class="gen">Indie</div>
+<div class="trk">♫ Kleopatra</div></div>
+<span class="badge w">🎯</span></div>
+<div class="bar"><div class="prog" id="p-Freude"></div></div>
+</div>
+<div class="card" onclick="play(this)" data-preview="https://cdnt-preview.dzcdn.net/api/1/1/3/e/b/0/3ebf75d11c1f7147298e366e9ff83089.mp3?hdnea=exp=1774306230~acl=/api/1/1/3/e/b/0/3ebf75d11c1f7147298e366e9ff83089.mp3*~data=user_id=0,application_id=42~hmac=d0a156d0718fd42482b456c3843222a7bac431678fe9966d8892b1847a1cb0ff">
+<div class="top"><div class="av" ><img src="https://cdn-images.dzcdn.net/images/artist/aadeaf267688b0750a1f5aa2a9dbba84/250x250-000000-80-0-0.jpg" alt="Karina Rose" loading="lazy"></div>
+<div class="inf"><div class="n">Karina Rose</div><div class="gen">Pop</div>
+<div class="trk">♫ Keiner so wie du</div></div>
+<span class="badge w">🎯</span></div>
+<div class="bar"><div class="prog" id="p-Karina-Rose"></div></div>
+</div>
+<div class="card" onclick="play(this)" data-preview="https://cdnt-preview.dzcdn.net/api/1/1/2/3/9/0/23928418a1aabd52d70006a4ac8ba0e4.mp3?hdnea=exp=1774306230~acl=/api/1/1/2/3/9/0/23928418a1aabd52d70006a4ac8ba0e4.mp3*~data=user_id=0,application_id=42~hmac=74451acfa12a179b38c1a00ce647ebb26278c397ac5d5156cffed8c35bd25689">
+<div class="top"><div class="av" ><img src="https://cdn-images.dzcdn.net/images/artist/91edf179d12f90ccb8a28d5128916ffa/250x250-000000-80-0-0.jpg" alt="Lumpenpack" loading="lazy"></div>
+<div class="inf"><div class="n">Lumpenpack</div><div class="gen">Comedy/Musik</div>
+<div class="trk">♫ MAMA GEHT'S FANTASTISCH</div></div>
+<span class="badge w">🎯</span></div>
+<div class="bar"><div class="prog" id="p-Lumpenpack"></div></div>
+</div>
+<div class="card" onclick="play(this)" data-preview="https://cdnt-preview.dzcdn.net/api/1/1/7/c/5/0/7c51708cfe1672a04626ef2071661b6a.mp3?hdnea=exp=1774306231~acl=/api/1/1/7/c/5/0/7c51708cfe1672a04626ef2071661b6a.mp3*~data=user_id=0,application_id=42~hmac=49b28dc2ac933ae54cad82d5949e45f0a838281a1c4db825db7937581bdf8b11">
+<div class="top"><div class="av" ><img src="https://cdn-images.dzcdn.net/images/artist/aac156dcbdac96963e7e20a5b8285087/250x250-000000-80-0-0.jpg" alt="Raumfisch" loading="lazy"></div>
+<div class="inf"><div class="n">Raumfisch</div><div class="gen">Indie</div>
+<div class="trk">♫ Kaufe nichts ficke niemand</div></div>
+<span class="badge w">🎯</span></div>
+<div class="bar"><div class="prog" id="p-Raumfisch"></div></div>
+</div>
+<div class="card" onclick="play(this)" data-preview="https://cdnt-preview.dzcdn.net/api/1/1/e/8/b/0/e8bc7f4760b1f0a318cbd7ac06eba92a.mp3?hdnea=exp=1774306232~acl=/api/1/1/e/8/b/0/e8bc7f4760b1f0a318cbd7ac06eba92a.mp3*~data=user_id=0,application_id=42~hmac=f1510f56f2dcc9f8536a6d3c9aed4fc6fc662c2e9d66976d2251a1bd32be2b3b">
+<div class="top"><div class="av" ><img src="https://cdn-images.dzcdn.net/images/artist/85a34aefba04a1223ff1d6b0fe08fc63/250x250-000000-80-0-0.jpg" alt="Billy Talent" loading="lazy"></div>
+<div class="inf"><div class="n">Billy Talent</div><div class="gen">Punk Rock</div>
+<div class="trk">♫ Red Flag</div></div>
+<span class="badge w">🎯</span></div>
+<div class="bar"><div class="prog" id="p-Billy-Talent"></div></div>
+</div>
+</div>
+<div class="sec" id="ss"><em>✓</em> Bereits gesehen <span class="c">(37)</span></div>
+<div class="g" id="sg"><div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/fdcb8a8f66feb8260ba20cd195c02b77/250x250-000000-80-0-0.jpg" alt="Kraftklub" loading="lazy"></div>
+<div class="inf"><div class="n">Kraftklub</div><div class="gen">Indie Rock</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/0b4f211d749fe944d984939dfab30d6d/250x250-000000-80-0-0.jpg" alt="Swiss" loading="lazy"></div>
+<div class="inf"><div class="n">Swiss</div><div class="gen">Hip-Hop</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/c043f010f24c5c9c2c4fabd49f2e9479/250x250-000000-80-0-0.jpg" alt="Electric Callboy" loading="lazy"></div>
+<div class="inf"><div class="n">Electric Callboy</div><div class="gen">Metalcore/Electro</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/2ffbb6971279cc57ba1c029178ac6ed3/250x250-000000-80-0-0.jpg" alt="Three Days Grace" loading="lazy"></div>
+<div class="inf"><div class="n">Three Days Grace</div><div class="gen">Post-Grunge</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/77e230736a2e0d7e71b17bc119374887/250x250-000000-80-0-0.jpg" alt="KIZ" loading="lazy"></div>
+<div class="inf"><div class="n">KIZ</div><div class="gen">Deutschrap</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/d159e783c1f419ae27fd2deca5b89b54/250x250-000000-80-0-0.jpg" alt="Bring me the Horizon" loading="lazy"></div>
+<div class="inf"><div class="n">Bring me the Horizon</div><div class="gen">Metalcore</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/aecbe3bf6476ed4f040dfd110dc66738/250x250-000000-80-0-0.jpg" alt="Blond" loading="lazy"></div>
+<div class="inf"><div class="n">Blond</div><div class="gen">Indie Pop</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/4e4c155cecfa1069b573ca387921c108/250x250-000000-80-0-0.jpg" alt="Provinz" loading="lazy"></div>
+<div class="inf"><div class="n">Provinz</div><div class="gen">Indie</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/3f943b4dc522a6e9cfbbc2a03fba465b/250x250-000000-80-0-0.jpg" alt="Donots" loading="lazy"></div>
+<div class="inf"><div class="n">Donots</div><div class="gen">Punk Rock</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/b82476c0f2d40f0baa2a99760e5b93ca/250x250-000000-80-0-0.jpg" alt="Engst" loading="lazy"></div>
+<div class="inf"><div class="n">Engst</div><div class="gen">Rock</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/2cfb09a0886cbd3d992ec21ebc0a0d6e/250x250-000000-80-0-0.jpg" alt="Drei Meter Feldweg" loading="lazy"></div>
+<div class="inf"><div class="n">Drei Meter Feldweg</div><div class="gen">Rock</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/920d4b693287873a8d2b3c934ba9b241/250x250-000000-80-0-0.jpg" alt="Hollywood Undead" loading="lazy"></div>
+<div class="inf"><div class="n">Hollywood Undead</div><div class="gen">Rap Rock</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/cebcc30407bce0281be418932dcf1b59/250x250-000000-80-0-0.jpg" alt="FiNCH" loading="lazy"></div>
+<div class="inf"><div class="n">FiNCH</div><div class="gen">Deutschrap</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/49331cf62f20285b686231909743d539/250x250-000000-80-0-0.jpg" alt="Raum27" loading="lazy"></div>
+<div class="inf"><div class="n">Raum27</div><div class="gen">Punk</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/8672b73b973e94ecd40effff48bc6f79/250x250-000000-80-0-0.jpg" alt="Kaffkiez" loading="lazy"></div>
+<div class="inf"><div class="n">Kaffkiez</div><div class="gen">Indie</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/b0d7f286df68f6a356aaa96976e2bb86/250x250-000000-80-0-0.jpg" alt="Querbeat" loading="lazy"></div>
+<div class="inf"><div class="n">Querbeat</div><div class="gen">Brass/Pop</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/f8d31120d99c7f7ae63a659182337d52/250x250-000000-80-0-0.jpg" alt="From Fall to Spring" loading="lazy"></div>
+<div class="inf"><div class="n">From Fall to Spring</div><div class="gen">Nu Metal</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/332d34f3dfffecd42425b31d21744b97/250x250-000000-80-0-0.jpg" alt="SDP" loading="lazy"></div>
+<div class="inf"><div class="n">SDP</div><div class="gen">Hip-Hop/Pop</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/fb63de1f383c440f2105fc184c58ee1d/250x250-000000-80-0-0.jpg" alt="Peter Fox" loading="lazy"></div>
+<div class="inf"><div class="n">Peter Fox</div><div class="gen">Dancehall/Reggae</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/b0b25a88620c56560c7232e7e0140bea/250x250-000000-80-0-0.jpg" alt="Bluthund" loading="lazy"></div>
+<div class="inf"><div class="n">Bluthund</div><div class="gen">Punk</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" style="background:hsl(91,40%,25%)">DT</div>
+<div class="inf"><div class="n">Don't Tell the Others</div><div class="gen">Rock</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/7cc0fab677927835c74b051ecf7d6ea4/250x250-000000-80-0-0.jpg" alt="Bosse" loading="lazy"></div>
+<div class="inf"><div class="n">Bosse</div><div class="gen">Indie Rock</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/f0b76fe3003da5aa5e7500861b63d593/250x250-000000-80-0-0.jpg" alt="Von wegen Lisbeth" loading="lazy"></div>
+<div class="inf"><div class="n">Von wegen Lisbeth</div><div class="gen">Indie</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/5a56be1008d5ba9c8037737fefbfd5f8/250x250-000000-80-0-0.jpg" alt="Ok.danke.tschüss" loading="lazy"></div>
+<div class="inf"><div class="n">Ok.danke.tschüss</div><div class="gen">Punk</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/971ea602a3a8bd01a1fcbd7021749eac/250x250-000000-80-0-0.jpg" alt="ENNIO" loading="lazy"></div>
+<div class="inf"><div class="n">ENNIO</div><div class="gen">Rap</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/473042446d0fd8aa09cb2ba8c3ddbf14/250x250-000000-80-0-0.jpg" alt="Madsen" loading="lazy"></div>
+<div class="inf"><div class="n">Madsen</div><div class="gen">Indie Rock</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/46b8d350b6a4fc7205d759bb80fbda85/250x250-000000-80-0-0.jpg" alt="Team Scheiße" loading="lazy"></div>
+<div class="inf"><div class="n">Team Scheiße</div><div class="gen">Punk</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/9b20940c2564f7b0053f8c80bcc80f47/250x250-000000-80-0-0.jpg" alt="Pendulum" loading="lazy"></div>
+<div class="inf"><div class="n">Pendulum</div><div class="gen">Drum & Bass</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/39621dce16e1afbbb3bd7198392ffd20/250x250-000000-80-0-0.jpg" alt="Against the Current" loading="lazy"></div>
+<div class="inf"><div class="n">Against the Current</div><div class="gen">Pop Rock</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/87ff9ceb3f3a09e15f496a5c0b502956/250x250-000000-80-0-0.jpg" alt="Betontod" loading="lazy"></div>
+<div class="inf"><div class="n">Betontod</div><div class="gen">Punk Rock</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/fd5d68eca2301cb49defc3a14561c693/250x250-000000-80-0-0.jpg" alt="Skindred" loading="lazy"></div>
+<div class="inf"><div class="n">Skindred</div><div class="gen">Nu Metal/Ragga</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/486e11229a2f72f26682bc9f32e2d7f7/250x250-000000-80-0-0.jpg" alt="Yu" loading="lazy"></div>
+<div class="inf"><div class="n">Yu</div><div class="gen">Indie</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/9afed7d13bf7ae58dfdd639bd25f0ac1/250x250-000000-80-0-0.jpg" alt="Tream" loading="lazy"></div>
+<div class="inf"><div class="n">Tream</div><div class="gen">Pop</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/a6a2bdbd07306d14fc7318af7a9b3800/250x250-000000-80-0-0.jpg" alt="The Butcher Sisters" loading="lazy"></div>
+<div class="inf"><div class="n">The Butcher Sisters</div><div class="gen">Punk</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/22057b3a8e372b839e73d6711d15d7bd/250x250-000000-80-0-0.jpg" alt="Ritter Lean" loading="lazy"></div>
+<div class="inf"><div class="n">Ritter Lean</div><div class="gen">Rap</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/13ad95ad86214952e16c734ed07512a7/250x250-000000-80-0-0.jpg" alt="Berq" loading="lazy"></div>
+<div class="inf"><div class="n">Berq</div><div class="gen">Rap</div></div>
+<span class="badge d">✓</span></div></div>
+<div class="card seen">
+<div class="top"><div class="av sm" ><img src="https://cdn-images.dzcdn.net/images/artist/3aef25e99767aeeffca7616dd872ce9e/250x250-000000-80-0-0.jpg" alt="Zartmann" loading="lazy"></div>
+<div class="inf"><div class="n">Zartmann</div><div class="gen">Indie</div></div>
+<span class="badge d">✓</span></div></div>
+</div>
+<script>
+let au=null,cur=null;
+function play(el){
+const url=el.dataset.preview;if(!url)return;
+if(cur){cur.classList.remove('playing');}
+if(au){au.pause();if(cur===el){cur=null;return;}}
+el.classList.add('playing');cur=el;
+au=new Audio(url);
+const bar=el.querySelector('.prog');
+au.ontimeupdate=()=>{if(bar&&au.duration)bar.style.width=(au.currentTime/au.duration*100)+'%'};
+au.onended=()=>{el.classList.remove('playing');if(bar)bar.style.width='0';cur=null};
+au.play();
+}
+function fi(v,btn){
+document.querySelectorAll('.fl button').forEach(b=>b.classList.remove('on'));
+btn.classList.add('on');
+['ws','wg'].forEach(id=>document.getElementById(id).style.display=v==='seen'?'none':'');
+['ss','sg'].forEach(id=>document.getElementById(id).style.display=v==='want'?'none':'');
+}
+</script>
+</body>
+</html>
