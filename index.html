@@ -24,7 +24,7 @@ header p{color:var(--muted);margin-top:6px;font-size:.88rem}
 .g{max-width:1100px;margin:0 auto;padding:0 12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
 .card{background:var(--card);border-radius:12px;overflow:hidden;border:1px solid #222;transition:all .2s;cursor:pointer}
 .card:hover{border-color:#444;transform:translateY(-1px)}
-.card.seen{cursor:default}.card.seen:hover{transform:none}
+.card.seen:hover{transform:translateY(-1px)}
 .card.seen .n{opacity:.5;text-decoration:line-through;text-decoration-color:var(--accent)}
 .card.seen .gen{opacity:.4}.card.seen .av{opacity:.5}
 .card.playing{border-color:var(--accent)}
@@ -67,15 +67,22 @@ let au=null,cur=null;
 const h=n=>n.split('').reduce((a,c)=>a+c.charCodeAt(0),0)%360;
 const ini=n=>n.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
 
-async function dzLookup(name){
+async function dzLookup(name, trackName){
   try{
     const r=await fetch(`https://api.deezer.com/search/artist?q=${encodeURIComponent(name)}&limit=1`);
     const d=await r.json();
     if(!d.data||!d.data[0])return{};
     const a=d.data[0];
-    const tr=await fetch(`https://api.deezer.com/artist/${a.id}/top?limit=1`);
-    const td=await tr.json();
-    const t=td.data&&td.data[0]?td.data[0]:{};
+    let t={};
+    if(trackName){
+      const sr=await fetch(`https://api.deezer.com/search?q=${encodeURIComponent(name+' '+trackName)}&limit=5`);
+      const sd=await sr.json();
+      if(sd.data){const m=sd.data.find(s=>s.artist&&s.artist.id===a.id);t=m||sd.data[0]||{}}
+    }else{
+      const tr=await fetch(`https://api.deezer.com/artist/${a.id}/top?limit=1`);
+      const td=await tr.json();
+      t=td.data&&td.data[0]?td.data[0]:{};
+    }
     return{img:a.picture_medium||'',track:t.title||'',preview:t.preview||''};
   }catch(e){return{}}
 }
@@ -90,11 +97,11 @@ function mkCard(b,seen,dz){
   
   el.innerHTML=`<div class="top">
     <div class="av${seen?' sm':''}" ${avStyle}>${img}</div>
-    <div class="inf"><div class="n">${b.name}</div><div class="gen">${b.genre||''}</div>${seen?'':track}</div>
+    <div class="inf"><div class="n">${b.name}</div><div class="gen">${b.genre||''}</div>${track}</div>
     <span class="badge ${seen?'d':'w'}">${seen?'✓':'🎯'}</span>
-  </div>${!seen&&preview?'<div class="bar"><div class="prog"></div></div>':''}`;
+  </div>${preview?'<div class="bar"><div class="prog"></div></div>':''}`;
   
-  if(!seen&&preview){
+  if(preview){
     el.onclick=()=>{
       if(cur){cur.classList.remove('playing')}
       if(au){au.pause();if(cur===el){cur=null;return}}
@@ -124,13 +131,13 @@ async function init(){
   
   // Load want bands with Deezer data
   for(const b of data.want){
-    const dz=await dzLookup(b.name);
+    const dz=await dzLookup(b.name,b.track);
     wg.appendChild(mkCard(b,false,dz));
   }
   
   // Load seen bands with Deezer images
   for(const b of data.seen){
-    const dz=await dzLookup(b.name);
+    const dz=await dzLookup(b.name,b.track);
     sg.appendChild(mkCard(b,true,dz));
   }
 }

@@ -8,7 +8,8 @@
     {
       "name": "Zirkel",
       "genre": "Deutschrap",
-      "deezer": "3ZVjA9LMKyghKJcSyRhaid"
+      "deezer": "3ZVjA9LMKyghKJcSyRhaid",
+      "track": "Dorn"
     },
     {
       "name": "Casper",
@@ -48,7 +49,8 @@
     {
       "name": "Haller",
       "genre": "Indie",
-      "deezer": "7l0gDf5VIpOPpDMdYt8vNz"
+      "deezer": "7l0gDf5VIpOPpDMdYt8vNz",
+      "track": "Schön genug"
     },
     {
       "name": "Feine Sahne Fischfilet",
@@ -83,7 +85,8 @@
     {
       "name": "Paula Hartmann",
       "genre": "Pop/R&B",
-      "deezer": "6gU2lzMPisjOmHlEN9FFJX"
+      "deezer": "6gU2lzMPisjOmHlEN9FFJX",
+      "track": "Schwarze SUVs"
     },
     {
       "name": "Focus.",
@@ -103,7 +106,8 @@
     {
       "name": "Lumpenpack",
       "genre": "Comedy/Musik",
-      "deezer": "2K6bdgBDhulVNz0JWYRwFO"
+      "deezer": "2K6bdgBDhulVNz0JWYRwFO",
+      "track": "Ketamin"
     },
     {
       "name": "Raumfisch",
@@ -114,6 +118,10 @@
       "name": "Billy Talent",
       "genre": "Punk Rock",
       "deezer": "2kCDVxSRso0RSVIL5K99JR"
+    },
+    {
+      "name": "Tiavo",
+      "genre": "Pop/Indie"
     }
   ],
   "seen": [
