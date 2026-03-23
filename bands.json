@@ -195,6 +195,13 @@
       "img": "https://cdn-images.dzcdn.net/images/artist/3e4ee145102dfc35705c11a1bc76e87b/250x250-000000-80-0-0.jpg",
       "trackTitle": "underwater aerobic",
       "preview": "previews/Tiavo.mp3"
+    },
+    {
+      "name": "Farber",
+      "genre": "Indie/Rock",
+      "img": "https://cdn-images.dzcdn.net/images/artist/d3654c0c357969829e8eee1c82418e5a/250x250-000000-80-0-0.jpg",
+      "trackTitle": "All die schönen Worte",
+      "preview": "previews/Farber.mp3"
     }
   ],
   "seen": [
