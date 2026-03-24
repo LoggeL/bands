@@ -35,7 +35,7 @@ header p{color:var(--muted);margin-top:8px;font-size:.9rem;letter-spacing:.5px}
 .sec .c{font-weight:400;opacity:.5}
 .sec::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,#333,transparent)}
 .g{max-width:1100px;margin:0 auto;padding:0 12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:8px}
-.card{background:var(--card);border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:all .3s;cursor:pointer;backdrop-filter:blur(20px);animation:slideUp .4s ease both}
+.card{background:var(--card);border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:all .3s;cursor:pointer;backdrop-filter:blur(20px)}
 .card:hover{border-color:rgba(255,45,85,.3);transform:translateY(-2px) scale(1.01);background:rgba(255,255,255,.07)}
 .card.playing{border-color:var(--accent);animation:pulse 2s ease infinite}
 .card.seen{opacity:.75}.card.seen:hover{opacity:.9}
@@ -92,7 +92,7 @@ const ini=n=>n.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
 function mkCard(b,seen,dz,i){
   const el=document.createElement('div');
   el.className='card'+(seen?' seen':'');
-  el.style.animationDelay=`${i*0.03}s`;
+  
   const img=dz&&dz.img?`<img src="${dz.img}" alt="${b.name}" loading="lazy">`:`${ini(b.name)}`;
   const avStyle=dz&&dz.img?'':`style="background:hsl(${h(b.name)},50%,20%)"`;
   const track=dz&&dz.track?`<div class="trk">${dz.track}</div>`:'';const note=b.note?`<div class="note">📍 ${b.note}</div>`:'';
