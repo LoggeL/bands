@@ -1,145 +1,376 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" class="dark">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Live sehen — Bandliste</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sonic Noir — Live Tracker</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎸</text></svg>">
-<meta property="og:title" content="Live sehen — Bandliste">
+<meta property="og:title" content="Sonic Noir — Live Tracker">
 <meta property="og:description" content="Bands die ich noch live sehen will">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://bands.logge.top">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#050505;--accent:#ff2d55;--accent2:#bf5af2;--green:#30d158;--text:#fff;--muted:#666;--card:rgba(255,255,255,.04)}
-body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;overflow-x:hidden}
-.bg{position:fixed;inset:0;z-index:-1;background:var(--bg)}
-.bg::before{content:'';position:absolute;top:-40%;left:-20%;width:80%;height:80%;background:radial-gradient(circle,rgba(255,45,85,.08) 0%,transparent 70%);animation:drift 20s ease-in-out infinite}
-.bg::after{content:'';position:absolute;bottom:-30%;right:-20%;width:70%;height:70%;background:radial-gradient(circle,rgba(191,90,242,.06) 0%,transparent 70%);animation:drift 25s ease-in-out infinite reverse}
+:root{
+  --bg:#0e0e11;
+  --surface:#0e0e11;
+  --surface-container:#19191d;
+  --surface-container-low:#131316;
+  --surface-container-high:#1f1f23;
+  --surface-bright:#2c2c30;
+  --surface-variant:#25252a;
+  --primary:#ff8aa9;
+  --primary-dim:#e4006c;
+  --primary-container:#ff719b;
+  --secondary:#2ff801;
+  --secondary-container:#106e00;
+  --tertiary:#a1faff;
+  --on-surface:#f0edf1;
+  --on-surface-variant:#acaaae;
+  --outline:#767579;
+  --outline-variant:#48474b;
+  --on-primary:#62002b;
+  --on-secondary:#0b5800;
+}
+body{background:var(--bg);color:var(--on-surface);font-family:'Manrope',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:var(--primary);color:#000}
+.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24;vertical-align:middle;display:inline-block;line-height:1}
+.ambient{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.ambient::before{content:'';position:absolute;top:-30%;left:-10%;width:60%;height:60%;background:radial-gradient(circle,rgba(228,0,108,.06) 0%,transparent 70%);animation:drift 20s ease-in-out infinite}
+.ambient::after{content:'';position:absolute;bottom:-20%;right:-10%;width:50%;height:50%;background:radial-gradient(circle,rgba(47,248,1,.03) 0%,transparent 70%);animation:drift 25s ease-in-out infinite reverse}
 @keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,-30px)}}
-@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,45,85,.4)}50%{box-shadow:0 0 20px 4px rgba(255,45,85,.1)}}
-header{text-align:center;padding:60px 20px 32px;position:relative}
-h1{font-size:3rem;font-weight:900;letter-spacing:-2px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-header p{color:var(--muted);margin-top:8px;font-size:.9rem;letter-spacing:.5px}
-.st{display:flex;justify-content:center;gap:40px;margin-top:24px}
-.st div{text-align:center}
-.st .nm{font-size:2.2rem;font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.st .nm.s{background:linear-gradient(135deg,var(--green),#0af);-webkit-background-clip:text;background-clip:text}
-.st .lb{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-top:4px}
-.fl{display:flex;justify-content:center;gap:8px;margin:28px 0 8px;flex-wrap:wrap}
-.fl button{background:transparent;border:1px solid #333;color:var(--text);padding:8px 20px;border-radius:24px;cursor:pointer;font-size:.8rem;transition:all .3s;backdrop-filter:blur(10px)}
-.fl button.on{background:linear-gradient(135deg,var(--accent),var(--accent2));border-color:transparent;font-weight:600}
-.fl button:hover{border-color:var(--accent);transform:scale(1.05)}
-.sec{max-width:1100px;margin:32px auto 14px;padding:0 16px;font-size:.85rem;font-weight:700;display:flex;align-items:center;gap:10px;text-transform:uppercase;letter-spacing:2px;color:var(--muted)}
-.sec em{font-style:normal;font-size:1.1rem}
-.sec .c{font-weight:400;opacity:.5}
-.sec::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,#333,transparent)}
-.g{max-width:1100px;margin:0 auto;padding:0 12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:8px}
-.card{background:var(--card);border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:all .3s;cursor:pointer;backdrop-filter:blur(20px)}
-.card:hover{border-color:rgba(255,45,85,.3);transform:translateY(-2px) scale(1.01);background:rgba(255,255,255,.07)}
-.card.playing{border-color:var(--accent);animation:pulse 2s ease infinite}
-.card.seen{opacity:.75}.card.seen:hover{opacity:.9}
-
-.top{display:flex;align-items:center;gap:12px;padding:14px 16px;position:relative}
-.av{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:800;flex-shrink:0;overflow:hidden;color:rgba(255,255,255,.8)}
-.av.sm{width:44px;height:44px;border-radius:12px}
-.av img{width:100%;height:100%;object-fit:cover}
-.inf{flex:1;min-width:0}
-.n{font-weight:700;font-size:.95rem;letter-spacing:-.3px}
-.gen{color:var(--muted);font-size:.7rem;margin-top:2px;text-transform:uppercase;letter-spacing:.5px}
-.trk{font-size:.7rem;margin-top:4px;opacity:.6;display:flex;align-items:center;gap:4px}
-.note{font-size:.65rem;color:var(--muted);margin-top:2px;font-style:italic;display:flex;align-items:center;gap:3px}
-.trk::before{content:'♫';color:var(--accent)}
-.badge{position:absolute;top:8px;right:10px;font-size:.55rem;padding:3px 8px;border-radius:8px;font-weight:700;text-transform:uppercase;letter-spacing:.8px}
-.badge.w{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
-.badge.d{background:var(--green);color:#000}
-.bar{height:2px;background:rgba(255,255,255,.06);margin:0 16px 12px;border-radius:1px;overflow:hidden}
-.prog{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:1px;transition:width .1s}
-.vol{display:flex;align-items:center;gap:8px;margin-top:4px}
-.vol input[type=range]{-webkit-appearance:none;width:80px;height:4px;background:#333;border-radius:2px;outline:none}
-.vol input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--accent);cursor:pointer}
-.vol span{font-size:.7rem;color:var(--muted);width:20px;text-align:center}
-footer{text-align:center;padding:60px 20px 40px;color:#666;font-size:.7rem;letter-spacing:1px;text-transform:uppercase}
-@media(max-width:640px){.g{grid-template-columns:1fr}h1{font-size:2rem}.st .nm{font-size:1.6rem}.st{gap:24px}}
+.topbar{position:fixed;top:0;width:100%;z-index:50;background:var(--surface-container-low);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.topbar-inner{display:flex;justify-content:space-between;align-items:center;padding:0 24px;height:64px;max-width:1200px;margin:0 auto}
+.logo{font-family:'Space Grotesk',sans-serif;font-weight:900;font-style:italic;font-size:1.5rem;text-transform:uppercase;letter-spacing:-0.05em;color:var(--primary)}
+.nav-links{display:flex;align-items:center;gap:8px}
+.nav-links a{font-family:'Space Grotesk',sans-serif;font-weight:700;text-transform:uppercase;font-size:.8rem;color:var(--on-surface);opacity:.6;padding:6px 14px;border-radius:8px;text-decoration:none;transition:all .3s;letter-spacing:.02em}
+.nav-links a:hover{opacity:1;background:var(--surface-variant)}
+.nav-links a.active{color:var(--primary);opacity:1}
+.vol-ctrl{display:flex;align-items:center;gap:8px}
+.vol-ctrl .material-symbols-outlined{font-size:18px;color:var(--on-surface-variant)}
+.vol-ctrl input[type=range]{-webkit-appearance:none;width:80px;height:3px;background:var(--surface-variant);border-radius:2px;outline:none}
+.vol-ctrl input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--primary);cursor:pointer;transition:transform .15s}
+.vol-ctrl input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.3)}
+.vol-ctrl input[type=range]::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:var(--primary);cursor:pointer;border:none}
+main{padding:88px 24px 120px;max-width:1200px;margin:0 auto}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:48px}
+.stat-card{padding:32px;border-radius:12px;position:relative;overflow:hidden}
+.stat-card .label{font-family:'Space Grotesk',sans-serif;font-size:.65rem;text-transform:uppercase;letter-spacing:.2em;margin-bottom:8px}
+.stat-card .number{font-family:'Space Grotesk',sans-serif;font-size:3.5rem;font-weight:700;letter-spacing:-0.04em;line-height:1}
+.stat-card .icon-bg{position:absolute;right:-8px;bottom:-8px;opacity:.08}
+.stat-card .icon-bg .material-symbols-outlined{font-size:5rem}
+.stat-card.want{background:var(--surface-container)}
+.stat-card.want .label{color:var(--primary)}
+.stat-card.want .number{color:var(--primary)}
+.stat-card.seen{background:var(--surface-container);border-bottom:2px solid var(--secondary)}
+.stat-card.seen .label{color:var(--secondary)}
+.stat-card.seen .number{color:var(--secondary)}
+.stat-card.total{background:var(--surface-container-low)}
+.stat-card.total .label{color:var(--on-surface-variant)}
+.stat-card.total .number{color:var(--tertiary)}
+.section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:24px;margin-top:48px}
+.section-header h2{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:800;text-transform:uppercase;letter-spacing:-0.04em;font-style:italic;line-height:1}
+.section-header .count{font-family:'Space Grotesk',sans-serif;font-size:.7rem;color:var(--on-surface-variant);text-transform:uppercase;letter-spacing:.15em;padding-bottom:4px}
+.band-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.band-card{position:relative;background:var(--surface-container);border-radius:8px;overflow:hidden;cursor:pointer;transition:all .3s}
+.band-card:hover{background:var(--surface-bright)}
+.band-card.playing{box-shadow:0 0 0 1px var(--primary),0 0 30px rgba(228,0,108,.15)}
+.band-card .card-inner{display:flex;padding:16px;gap:16px}
+.band-card .card-img{width:80px;height:80px;flex-shrink:0;overflow:hidden;border-radius:12px;background:var(--surface-variant)}
+.band-card .card-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%);transition:all .5s}
+.band-card:hover .card-img img{filter:grayscale(0);transform:scale(1.1)}
+.band-card .card-info{display:flex;flex-direction:column;justify-content:center;flex:1;min-width:0;padding-right:48px}
+.band-card .genre-tag{font-family:'Space Grotesk',sans-serif;font-size:.6rem;text-transform:uppercase;letter-spacing:.15em;color:var(--tertiary);margin-bottom:4px}
+.band-card .band-name{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;line-height:1.2}
+.band-card .track-name{font-size:.7rem;color:var(--on-surface-variant);margin-top:6px;opacity:.7}
+.band-card .track-icon{color:var(--primary);margin-right:4px}
+.band-card .badge{position:absolute;top:16px;right:16px;font-family:'Space Grotesk',sans-serif;font-size:.55rem;font-weight:700;padding:4px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:.05em}
+.band-card .badge.want-badge{background:var(--primary-container);color:var(--on-primary)}
+.band-card .badge.done-badge{background:var(--secondary-container);color:#e7ffd9;box-shadow:0 0 15px rgba(47,248,1,.2)}
+.band-card .progress-bar{height:2px;background:rgba(255,255,255,.04);margin:0 16px 12px;border-radius:1px;overflow:hidden}
+.band-card .progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--primary-dim),var(--primary));border-radius:1px;transition:width .1s}
+.seen-grid{display:flex;flex-direction:column;gap:12px}
+.seen-card{position:relative;display:flex;align-items:center;gap:20px;padding:20px;background:var(--surface-container);border-radius:12px;cursor:pointer;transition:all .3s;box-shadow:inset 0 0 20px rgba(47,248,1,.01)}
+.seen-card:hover{background:var(--surface-bright)}
+.seen-card.playing{box-shadow:0 0 0 1px var(--secondary),0 0 30px rgba(47,248,1,.1)}
+.seen-card .seen-img{width:64px;height:64px;flex-shrink:0;overflow:hidden;border-radius:10px;background:var(--surface-variant)}
+.seen-card .seen-img img{width:100%;height:100%;object-fit:cover;transition:all .5s}
+.seen-card:hover .seen-img img{transform:scale(1.1)}
+.seen-card .seen-info{flex:1;min-width:0}
+.seen-card .seen-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:4px}
+.seen-card .band-name{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:700}
+.seen-card .genre-tag{font-family:'Space Grotesk',sans-serif;font-size:.55rem;text-transform:uppercase;letter-spacing:.15em;color:var(--tertiary)}
+.seen-card .venue-info{font-size:.75rem;color:var(--on-surface-variant);display:flex;align-items:center;gap:4px;margin-top:2px}
+.seen-card .venue-icon{font-size:13px;color:var(--secondary)}
+.seen-card .track-name{font-size:.65rem;color:var(--on-surface-variant);opacity:.6;margin-top:4px}
+.seen-card .track-icon{color:var(--secondary);margin-right:4px}
+.seen-card .badge{position:absolute;top:12px;right:16px;font-family:'Space Grotesk',sans-serif;font-size:.5rem;font-weight:700;padding:3px 8px;border-radius:999px;text-transform:uppercase;letter-spacing:.05em;background:var(--secondary);color:var(--on-secondary);display:flex;align-items:center;gap:3px}
+.seen-card .progress-bar{height:2px;background:rgba(255,255,255,.04);margin:12px 20px 0;border-radius:1px;overflow:hidden}
+.seen-card .progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--secondary-container),var(--secondary));border-radius:1px;transition:width .1s}
+footer{text-align:center;padding:60px 24px 40px;font-family:'Space Grotesk',sans-serif;font-size:.6rem;color:var(--outline);letter-spacing:.15em;text-transform:uppercase}
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;width:100%;z-index:50;justify-content:space-around;align-items:center;padding:0 16px 16px;height:80px;background:rgba(19,19,22,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.bottom-nav a{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 16px;color:var(--on-surface);opacity:.5;text-decoration:none;transition:all .2s;border-radius:12px}
+.bottom-nav a.active{background:var(--surface-variant);opacity:1;color:var(--primary)}
+.bottom-nav a .nav-label{font-family:'Space Grotesk',sans-serif;font-size:.55rem;font-weight:700;text-transform:uppercase;margin-top:4px}
+.fallback-av{display:flex;align-items:center;justify-content:center;font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:.8rem;color:rgba(255,255,255,.6);width:100%;height:100%}
+@media(max-width:768px){
+  .stats-grid{grid-template-columns:1fr;gap:12px}
+  .stat-card{padding:20px}
+  .stat-card .number{font-size:2.5rem}
+  .band-grid{grid-template-columns:1fr}
+  .section-header h2{font-size:1.5rem}
+  .nav-links{display:none}
+  .bottom-nav{display:flex}
+  main{padding-bottom:140px}
+}
+@media(min-width:769px){.bottom-nav{display:none !important}}
+.band-card:hover .badge.want-badge{box-shadow:0 0 12px rgba(255,113,155,.4)}
+.seen-card:hover .badge{box-shadow:0 0 12px rgba(47,248,1,.4)}
 </style>
 </head>
 <body>
-<div class="bg"></div>
-<header>
-<h1>LIVE SEHEN</h1>
-<p>Bands die ich noch live sehen will</p>
-<div class="st">
-<div><div class="nm" id="wc">-</div><div class="lb">Bucket List</div></div>
-<div><div class="nm s" id="sc">-</div><div class="lb">Erlebt ✓</div></div>
-<div><div class="nm" id="tc">-</div><div class="lb">Total</div></div>
-</div>
-<div class="vol" style="justify-content:center;margin-top:16px">
-<span>🔈</span>
-<input type="range" id="vol" min="0" max="1" step="0.05" value="0.7" oninput="if(au)au.volume=this.value">
-<span>🔊</span>
-</div>
+<div class="ambient"></div>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="logo">Sonic Noir</div>
+    <div class="nav-links">
+      <a href="#bucket" class="active">Bucket List</a>
+      <a href="#history">History</a>
+    </div>
+    <div class="vol-ctrl">
+      <span class="material-symbols-outlined">volume_down</span>
+      <input type="range" id="vol" min="0" max="1" step="0.05" value="0.7">
+      <span class="material-symbols-outlined">volume_up</span>
+    </div>
+  </div>
 </header>
-<div class="sec" id="ws"><em>🎯</em> BUCKET LIST <span class="c" id="wn"></span></div>
-<div class="g" id="wg"></div>
-<div class="sec" id="ss"><em>✓</em> ERLEBT <span class="c" id="sn"></span></div>
-<div class="g" id="sg"></div>
-<footer>Made with 🤘 & good taste</footer>
+<main>
+  <section class="stats-grid">
+    <div class="stat-card want">
+      <div class="label">Bucket List</div>
+      <div class="number" id="wc">-</div>
+      <div class="icon-bg"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">favorite</span></div>
+    </div>
+    <div class="stat-card seen">
+      <div class="label">Erlebt</div>
+      <div class="number" id="sc">-</div>
+      <div class="icon-bg"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">check_circle</span></div>
+    </div>
+    <div class="stat-card total">
+      <div class="label">Total Archive</div>
+      <div class="number" id="tc">-</div>
+      <div class="icon-bg"><span class="material-symbols-outlined">library_music</span></div>
+    </div>
+  </section>
+  <div class="section-header" id="bucket">
+    <h2>Bucket List</h2>
+    <div class="count" id="wn"></div>
+  </div>
+  <div class="band-grid" id="wg"></div>
+  <div class="section-header" id="history">
+    <h2>Live History</h2>
+    <div class="count" id="sn"></div>
+  </div>
+  <div class="seen-grid" id="sg"></div>
+</main>
+<footer>Made with 🤘 &amp; good taste</footer>
+<nav class="bottom-nav">
+  <a href="#bucket" class="active">
+    <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">favorite</span>
+    <span class="nav-label">Bucket List</span>
+  </a>
+  <a href="#history">
+    <span class="material-symbols-outlined">history</span>
+    <span class="nav-label">History</span>
+  </a>
+</nav>
 <script>
 let au=null,cur=null;
-const h=n=>n.split('').reduce((a,c)=>a+c.charCodeAt(0),0)%360;
+const hue=n=>n.split('').reduce((a,c)=>a+c.charCodeAt(0),0)%360;
 const ini=n=>n.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
 
-function mkCard(b,seen,dz,i){
+// Escape HTML to prevent XSS from any data source
+function esc(s){
+  if(!s)return '';
+  const d=document.createElement('div');
+  d.textContent=s;
+  return d.innerHTML;
+}
+
+function mkWantCard(b){
   const el=document.createElement('div');
-  el.className='card'+(seen?' seen':'');
-  
-  const img=dz&&dz.img?`<img src="${dz.img}" alt="${b.name}" loading="lazy">`:`${ini(b.name)}`;
-  const avStyle=dz&&dz.img?'':`style="background:hsl(${h(b.name)},50%,20%)"`;
-  const track=dz&&dz.track?`<div class="trk">${dz.track}</div>`:'';const note=b.note?`<div class="note">📍 ${b.note}</div>`:'';
-  const preview=dz&&dz.preview?dz.preview:'';
-  
-  el.innerHTML=`<div class="top">
-    <div class="av${seen?' sm':''}" ${avStyle}>${img}</div>
-    <div class="inf"><div class="n">${b.name}</div><div class="gen">${b.genre||''}</div>${track}${note}</div>
-    <span class="badge ${seen?'d':'w'}">${seen?'✓':'want'}</span>
-  </div>${preview?'<div class="bar"><div class="prog"></div></div>':''}`;
-  
-  if(preview){
-    el.onclick=()=>{
-      if(cur){cur.classList.remove('playing')}
-      if(au){au.pause();if(cur===el){cur=null;return}}
-      el.classList.add('playing');cur=el;
-      au=new Audio(preview);
-      const bar=el.querySelector('.prog');
-      au.ontimeupdate=()=>{if(bar&&au.duration)bar.style.width=(au.currentTime/au.duration*100)+'%'};
-      au.onended=()=>{el.classList.remove('playing');if(bar)bar.style.width='0';cur=null};
-      au.volume=parseFloat(document.getElementById('vol').value);au.play();
-    };
+  el.className='band-card';
+
+  const inner=document.createElement('div');
+  inner.className='card-inner';
+
+  const imgWrap=document.createElement('div');
+  imgWrap.className='card-img';
+  if(b.img){
+    const img=document.createElement('img');
+    img.src=b.img;img.alt=b.name;img.loading='lazy';
+    imgWrap.appendChild(img);
+  }else{
+    const fb=document.createElement('div');
+    fb.className='fallback-av';
+    fb.style.background='hsl('+hue(b.name)+',40%,15%)';
+    fb.textContent=ini(b.name);
+    imgWrap.appendChild(fb);
+  }
+  inner.appendChild(imgWrap);
+
+  const info=document.createElement('div');
+  info.className='card-info';
+  const genre=document.createElement('div');
+  genre.className='genre-tag';genre.textContent=b.genre||'';
+  const name=document.createElement('div');
+  name.className='band-name';name.textContent=b.name;
+  info.appendChild(genre);info.appendChild(name);
+  if(b.trackTitle){
+    const trk=document.createElement('div');
+    trk.className='track-name';
+    const trkIcon=document.createElement('span');
+    trkIcon.className='track-icon';trkIcon.textContent='\u266B ';
+    trk.appendChild(trkIcon);
+    trk.appendChild(document.createTextNode(b.trackTitle));
+    info.appendChild(trk);
+  }
+  inner.appendChild(info);
+
+  const badge=document.createElement('span');
+  badge.className='badge want-badge';badge.textContent='WANT';
+  inner.appendChild(badge);
+  el.appendChild(inner);
+
+  if(b.preview){
+    const bar=document.createElement('div');bar.className='progress-bar';
+    const fill=document.createElement('div');fill.className='progress-fill';
+    bar.appendChild(fill);el.appendChild(bar);
+    bindAudio(el,b.preview);
   }
   return el;
 }
+
+function mkSeenCard(b){
+  const el=document.createElement('div');
+  el.className='seen-card';
+
+  const imgWrap=document.createElement('div');
+  imgWrap.className='seen-img';
+  if(b.img){
+    const img=document.createElement('img');
+    img.src=b.img;img.alt=b.name;img.loading='lazy';
+    imgWrap.appendChild(img);
+  }else{
+    const fb=document.createElement('div');
+    fb.className='fallback-av';
+    fb.style.background='hsl('+hue(b.name)+',40%,15%)';
+    fb.textContent=ini(b.name);
+    imgWrap.appendChild(fb);
+  }
+  el.appendChild(imgWrap);
+
+  const info=document.createElement('div');
+  info.className='seen-info';
+
+  const top=document.createElement('div');
+  top.className='seen-top';
+  const name=document.createElement('div');
+  name.className='band-name';name.textContent=b.name;
+  const genre=document.createElement('div');
+  genre.className='genre-tag';genre.textContent=b.genre||'';
+  top.appendChild(name);top.appendChild(genre);
+  info.appendChild(top);
+
+  if(b.note){
+    const venue=document.createElement('div');
+    venue.className='venue-info';
+    const icon=document.createElement('span');
+    icon.className='material-symbols-outlined venue-icon';
+    icon.style.cssText="font-variation-settings:'FILL' 1";
+    icon.textContent='location_on';
+    venue.appendChild(icon);
+    venue.appendChild(document.createTextNode(b.note));
+    info.appendChild(venue);
+  }
+  if(b.trackTitle){
+    const trk=document.createElement('div');
+    trk.className='track-name';
+    const trkIcon=document.createElement('span');
+    trkIcon.className='track-icon';trkIcon.textContent='\u266B ';
+    trk.appendChild(trkIcon);
+    trk.appendChild(document.createTextNode(b.trackTitle));
+    info.appendChild(trk);
+  }
+  el.appendChild(info);
+
+  const badge=document.createElement('span');
+  badge.className='badge';
+  const checkIcon=document.createElement('span');
+  checkIcon.className='material-symbols-outlined';
+  checkIcon.style.cssText="font-variation-settings:'FILL' 1;font-size:10px";
+  checkIcon.textContent='check_circle';
+  badge.appendChild(checkIcon);
+  badge.appendChild(document.createTextNode('SEEN'));
+  el.appendChild(badge);
+
+  if(b.preview){
+    const bar=document.createElement('div');bar.className='progress-bar';
+    const fill=document.createElement('div');fill.className='progress-fill';
+    bar.appendChild(fill);el.appendChild(bar);
+    bindAudio(el,b.preview);
+  }
+  return el;
+}
+
+function bindAudio(el,preview){
+  el.onclick=()=>{
+    if(cur){cur.classList.remove('playing')}
+    if(au){au.pause();if(cur===el){cur=null;return}}
+    el.classList.add('playing');cur=el;
+    au=new Audio(preview);
+    const bar=el.querySelector('.progress-fill');
+    au.ontimeupdate=()=>{if(bar&&au.duration)bar.style.width=(au.currentTime/au.duration*100)+'%'};
+    au.onended=()=>{el.classList.remove('playing');if(bar)bar.style.width='0';cur=null};
+    au.volume=parseFloat(document.getElementById('vol').value);
+    au.play();
+  };
+}
+
+document.getElementById('vol').addEventListener('input',function(){
+  if(au)au.volume=this.value;
+});
 
 async function init(){
   const r=await fetch('bands.json');
   const data=await r.json();
   const wg=document.getElementById('wg');
   const sg=document.getElementById('sg');
-  wg.innerHTML='';sg.innerHTML='';
-  
+  wg.replaceChildren();sg.replaceChildren();
+
   document.getElementById('wc').textContent=data.want.length;
   document.getElementById('sc').textContent=data.seen.length;
   document.getElementById('tc').textContent=data.want.length+data.seen.length;
-  document.getElementById('wn').textContent=`(${data.want.length})`;
-  document.getElementById('sn').textContent=`(${data.seen.length})`;
-  
-  data.want.forEach((b,i)=>{
-    wg.appendChild(mkCard(b,false,{img:b.img,track:b.trackTitle,preview:b.preview},i));
-  });
-  data.seen.forEach((b,i)=>{
-    sg.appendChild(mkCard(b,true,{img:b.img,track:b.trackTitle,preview:b.preview},i));
-  });
+  document.getElementById('wn').textContent=data.want.length+' Bands';
+  document.getElementById('sn').textContent=data.seen.length+' Experiences';
+
+  data.want.forEach(b=>wg.appendChild(mkWantCard(b)));
+  data.seen.forEach(b=>sg.appendChild(mkSeenCard(b)));
 }
 
+document.querySelectorAll('.nav-links a, .bottom-nav a').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const id=a.getAttribute('href').slice(1);
+    const target=document.getElementById(id);
+    if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
+    document.querySelectorAll('.nav-links a').forEach(l=>l.classList.remove('active'));
+    document.querySelectorAll('.bottom-nav a').forEach(l=>l.classList.remove('active'));
+    document.querySelectorAll('[href="'+a.getAttribute('href')+'"]').forEach(l=>l.classList.add('active'));
+  });
+});
 
 init();
 </script>
