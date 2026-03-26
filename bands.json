@@ -1,37 +1,18 @@
 {
   "want": [
     {
-      "name": "Jack Pott",
-      "genre": "Punk",
-      "deezer": "4XahEEGMFOLFifWBsFMMnN",
-      "img": "https://cdn-images.dzcdn.net/images/artist/66c0ba3f9c8c9a5ce3aef1f6a3883f4b/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Alle meine Freunde (Version 2022)",
-      "preview": "previews/Jack-Pott.mp3?v=1774311427"
-    },
-    {
-      "name": "Zirkel",
-      "genre": "Deutschrap",
-      "deezer": "3ZVjA9LMKyghKJcSyRhaid",
-      "track": "Dorn",
-      "img": "https://cdn-images.dzcdn.net/images/artist/ab3526a996738e1b856d4f14a5263744/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Wenn Fynn Kliemann alles kann",
-      "preview": "previews/Zirkel.mp3?v=1774311427"
-    },
-    {
-      "name": "Casper",
-      "genre": "Deutschrap/Rock",
-      "deezer": "1GhPHrq36VKCY3ucVaZCfo",
-      "img": "https://cdn-images.dzcdn.net/images/artist/a0b7d78a77735ea168e1f4d3f4a64c96/250x250-000000-80-0-0.jpg",
-      "trackTitle": "sommer (feat. CRO)",
-      "preview": "previews/Casper.mp3?v=1774311427"
-    },
-    {
-      "name": "Broilers",
+      "name": "8kids",
       "genre": "Punk Rock",
-      "deezer": "3csTaq1Nn36M2N0Y0iAB9g",
-      "img": "https://cdn-images.dzcdn.net/images/artist/2cfe48ee31420dc4e7686e7c3c845417/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Ist da jemand?",
-      "preview": "previews/Broilers.mp3?v=1774311427"
+      "img": "https://cdn-images.dzcdn.net/images/artist/1bd50fe0d686877da989a795887e3d47/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Wir bleiben Kids (feat. Swiss)",
+      "preview": "previews/8kids.mp3?v=1774568683"
+    },
+    {
+      "name": "Alligatoah",
+      "genre": "Hip-Hop/Rock",
+      "img": "https://cdn-images.dzcdn.net/images/artist/5c52e9795414734e1471d00efd48d430/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Willst du",
+      "preview": "previews/Alligatoah.mp3?v=1774568683"
     },
     {
       "name": "Antifuchs",
@@ -40,79 +21,6 @@
       "img": "https://cdn-images.dzcdn.net/images/artist/aeb524667bf6897e9bcf70d46cd41759/250x250-000000-80-0-0.jpg",
       "trackTitle": "Randale & Heckmeck",
       "preview": "previews/Antifuchs.mp3?v=1774311427"
-    },
-    {
-      "name": "OK KID",
-      "genre": "Indie/Electro",
-      "deezer": "1MihhgXkTahISnNmRFktlM",
-      "img": "https://cdn-images.dzcdn.net/images/artist/f30bf029459eedbcb4dd7cbc2a35a968/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Rave On",
-      "preview": "previews/OK-KID.mp3?v=1774311427"
-    },
-    {
-      "name": "VON WELT",
-      "genre": "Rap",
-      "deezer": "5byLzOPqrzLxdbcTjRbnFV",
-      "img": "https://cdn-images.dzcdn.net/images/artist/7bab892285bcf5269009bda2a3cc16d7/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Fata Morgana",
-      "preview": "previews/VON-WELT.mp3?v=1774311427"
-    },
-    {
-      "name": "Liedfett",
-      "genre": "Punk/Ska",
-      "deezer": "1nDifYvXKXqRaP89uysa1d",
-      "img": "https://cdn-images.dzcdn.net/images/artist/5225599dc93353934d42feb3d6c67f60/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Kommst du mit?",
-      "preview": "previews/Liedfett.mp3?v=1774311427"
-    },
-    {
-      "name": "Deichkind",
-      "genre": "Electro/Hip-Hop",
-      "deezer": "5FxtHAML3JGMbVNv8eQsml",
-      "img": "https://cdn-images.dzcdn.net/images/artist/3e0c7da89fc461b44f0a5e72be69d8d0/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Zeit aus dem Fenster",
-      "preview": "previews/Deichkind.mp3?v=1774311427"
-    },
-    {
-      "name": "Haller",
-      "genre": "Indie",
-      "deezer": "7l0gDf5VIpOPpDMdYt8vNz",
-      "track": "Schön genug",
-      "img": "https://cdn-images.dzcdn.net/images/artist/88d539e6a46c2fe9c76ea6800174e8a5/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Schön genug",
-      "preview": "previews/Haller.mp3?v=1774311427"
-    },
-    {
-      "name": "Feine Sahne Fischfilet",
-      "genre": "Punk",
-      "deezer": "6FHkdSjZJiKSkdCtNRMDwj",
-      "img": "https://cdn-images.dzcdn.net/images/artist/b72967bf4b539d8d45fd6d717742c54d/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Komplett im Arsch",
-      "preview": "previews/Feine-Sahne-Fischfilet.mp3?v=1774311427"
-    },
-    {
-      "name": "JEREMIAS",
-      "genre": "Indie Pop",
-      "deezer": "2OZBQ0P5THFaWqSSHxOcr6",
-      "img": "https://cdn-images.dzcdn.net/images/artist/c7a29cd8b233d9e147cc0537846292b1/250x250-000000-80-0-0.jpg",
-      "trackTitle": "reich",
-      "preview": "previews/JEREMIAS.mp3?v=1774336859"
-    },
-    {
-      "name": "Rogers",
-      "genre": "Punk Rock",
-      "deezer": "41bJHheI00sy9FPneBtjBa",
-      "img": "https://cdn-images.dzcdn.net/images/artist/dadcb094b958da3ffe930b447b4405ad/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Mittelfinger für immer",
-      "preview": "previews/Rogers.mp3?v=1774311427"
-    },
-    {
-      "name": "Linkin Park",
-      "genre": "Nu Metal/Rock",
-      "deezer": "6XyY86QOPPez6joegGAjR5",
-      "img": "https://cdn-images.dzcdn.net/images/artist/4886905210739af3438990897bad3a98/250x250-000000-80-0-0.jpg",
-      "trackTitle": "In the End",
-      "preview": "previews/Linkin-Park.mp3?v=1774311427"
     },
     {
       "name": "bac",
@@ -124,13 +32,79 @@
       "track": "Zwanzig"
     },
     {
-      "name": "Paula Hartmann",
-      "genre": "Pop/R&B",
-      "deezer": "6gU2lzMPisjOmHlEN9FFJX",
-      "track": "Schwarze SUVs",
-      "img": "https://cdn-images.dzcdn.net/images/artist/782fabbc3174b6842468e1476d6d6ed9/250x250-000000-80-0-0.jpg",
-      "trackTitle": "schwarze SUVs",
-      "preview": "previews/Paula-Hartmann.mp3?v=1774311427"
+      "name": "Bad Omens",
+      "genre": "Metalcore",
+      "img": "https://cdn-images.dzcdn.net/images/artist/8a185a7bd12ca20bb8d9e01ea699467d/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Nowhere To Go",
+      "preview": "previews/Bad-Omens.mp3?v=1774337004"
+    },
+    {
+      "name": "Billy Talent",
+      "genre": "Punk Rock",
+      "deezer": "2kCDVxSRso0RSVIL5K99JR",
+      "img": "https://cdn-images.dzcdn.net/images/artist/85a34aefba04a1223ff1d6b0fe08fc63/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Red Flag",
+      "preview": "previews/Billy-Talent.mp3?v=1774311427"
+    },
+    {
+      "name": "Broilers",
+      "genre": "Punk Rock",
+      "deezer": "3csTaq1Nn36M2N0Y0iAB9g",
+      "img": "https://cdn-images.dzcdn.net/images/artist/2cfe48ee31420dc4e7686e7c3c845417/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Ist da jemand?",
+      "preview": "previews/Broilers.mp3?v=1774311427"
+    },
+    {
+      "name": "Casper",
+      "genre": "Deutschrap/Rock",
+      "deezer": "1GhPHrq36VKCY3ucVaZCfo",
+      "img": "https://cdn-images.dzcdn.net/images/artist/a0b7d78a77735ea168e1f4d3f4a64c96/250x250-000000-80-0-0.jpg",
+      "trackTitle": "sommer (feat. CRO)",
+      "preview": "previews/Casper.mp3?v=1774311427"
+    },
+    {
+      "name": "Crystal F",
+      "genre": "Rap",
+      "img": "https://cdn-images.dzcdn.net/images/artist/ccefb5c064919ff0e2d63caa65cd5d96/250x250-000000-80-0-0.jpg",
+      "trackTitle": "lieblos",
+      "preview": "previews/Crystal-F.mp3?v=1774568683"
+    },
+    {
+      "name": "Deichkind",
+      "genre": "Electro/Hip-Hop",
+      "deezer": "5FxtHAML3JGMbVNv8eQsml",
+      "img": "https://cdn-images.dzcdn.net/images/artist/3e0c7da89fc461b44f0a5e72be69d8d0/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Zeit aus dem Fenster",
+      "preview": "previews/Deichkind.mp3?v=1774311427"
+    },
+    {
+      "name": "Drunken Masters",
+      "genre": "Hip-Hop",
+      "img": "https://cdn-images.dzcdn.net/images/artist/3ac816deb64f6877c77abb3cac982bc3/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Bauchnabelpiercing",
+      "preview": "previews/Drunken-Masters.mp3?v=1774568683"
+    },
+    {
+      "name": "Error",
+      "genre": "Punk",
+      "img": "https://cdn-images.dzcdn.net/images/artist/76281fdb869723e1d86e9eff2ce0cee7/250x250-000000-80-0-0.jpg",
+      "trackTitle": "FLUCHTPUNKT",
+      "preview": "previews/Error.mp3?v=1774568683"
+    },
+    {
+      "name": "Farber",
+      "genre": "Indie/Rock",
+      "img": "https://cdn-images.dzcdn.net/images/artist/d3654c0c357969829e8eee1c82418e5a/250x250-000000-80-0-0.jpg",
+      "trackTitle": "All die schönen Worte",
+      "preview": "previews/Farber.mp3?v=1774311427"
+    },
+    {
+      "name": "Feine Sahne Fischfilet",
+      "genre": "Punk",
+      "deezer": "6FHkdSjZJiKSkdCtNRMDwj",
+      "img": "https://cdn-images.dzcdn.net/images/artist/b72967bf4b539d8d45fd6d717742c54d/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Komplett im Arsch",
+      "preview": "previews/Feine-Sahne-Fischfilet.mp3?v=1774311427"
     },
     {
       "name": "Focus.",
@@ -149,12 +123,81 @@
       "preview": "previews/Freude.mp3?v=1774311427"
     },
     {
+      "name": "grandson",
+      "genre": "Alt Rock",
+      "img": "https://cdn-images.dzcdn.net/images/artist/46be123131f61e8e359c8b05248290b5/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Blood // Water",
+      "preview": "previews/grandson.mp3?v=1774336960"
+    },
+    {
+      "name": "Haller",
+      "genre": "Indie",
+      "deezer": "7l0gDf5VIpOPpDMdYt8vNz",
+      "track": "Schön genug",
+      "img": "https://cdn-images.dzcdn.net/images/artist/88d539e6a46c2fe9c76ea6800174e8a5/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Schön genug",
+      "preview": "previews/Haller.mp3?v=1774311427"
+    },
+    {
+      "name": "Jack Pott",
+      "genre": "Punk",
+      "deezer": "4XahEEGMFOLFifWBsFMMnN",
+      "img": "https://cdn-images.dzcdn.net/images/artist/66c0ba3f9c8c9a5ce3aef1f6a3883f4b/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Alle meine Freunde (Version 2022)",
+      "preview": "previews/Jack-Pott.mp3?v=1774311427"
+    },
+    {
+      "name": "JBS",
+      "genre": "Rap",
+      "img": "https://cdn-images.dzcdn.net/images/artist/0e2038ae4d8a2d068a6ad35a023cda56/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Gewitter",
+      "preview": "previews/JBS.mp3?v=1774336914"
+    },
+    {
+      "name": "JEREMIAS",
+      "genre": "Indie Pop",
+      "deezer": "2OZBQ0P5THFaWqSSHxOcr6",
+      "img": "https://cdn-images.dzcdn.net/images/artist/c7a29cd8b233d9e147cc0537846292b1/250x250-000000-80-0-0.jpg",
+      "trackTitle": "reich",
+      "preview": "previews/JEREMIAS.mp3?v=1774336859"
+    },
+    {
+      "name": "Juse Ju",
+      "genre": "Rap",
+      "img": "https://cdn-images.dzcdn.net/images/artist/e5f448aafbc633491e6076ccb6c81ff7/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Lovesongs",
+      "preview": "previews/Juse-Ju.mp3?v=1774568683"
+    },
+    {
       "name": "Karina Rose",
       "genre": "Pop",
       "deezer": "2ayMbJViCDfBOkxNYqIFXt",
       "img": "https://cdn-images.dzcdn.net/images/artist/aadeaf267688b0750a1f5aa2a9dbba84/250x250-000000-80-0-0.jpg",
       "trackTitle": "Keiner so wie du",
       "preview": "previews/Karina-Rose.mp3?v=1774311427"
+    },
+    {
+      "name": "Kummer",
+      "genre": "Indie/Rap",
+      "img": "https://cdn-images.dzcdn.net/images/artist/9b0b56d00929d386dc003bfb1939aaaf/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Bei Dir",
+      "preview": "previews/Kummer.mp3?v=1774568683"
+    },
+    {
+      "name": "Liedfett",
+      "genre": "Punk/Ska",
+      "deezer": "1nDifYvXKXqRaP89uysa1d",
+      "img": "https://cdn-images.dzcdn.net/images/artist/5225599dc93353934d42feb3d6c67f60/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Kommst du mit?",
+      "preview": "previews/Liedfett.mp3?v=1774311427"
+    },
+    {
+      "name": "Linkin Park",
+      "genre": "Nu Metal/Rock",
+      "deezer": "6XyY86QOPPez6joegGAjR5",
+      "img": "https://cdn-images.dzcdn.net/images/artist/4886905210739af3438990897bad3a98/250x250-000000-80-0-0.jpg",
+      "trackTitle": "In the End",
+      "preview": "previews/Linkin-Park.mp3?v=1774311427"
     },
     {
       "name": "Lumpenpack",
@@ -166,97 +209,11 @@
       "preview": "previews/Lumpenpack.mp3?v=1774568230"
     },
     {
-      "name": "Raumfisch",
+      "name": "Marlo Grosshardt",
       "genre": "Indie",
-      "deezer": "5wVFbzJNBZNkaq5rN9zxGD",
-      "img": "https://cdn-images.dzcdn.net/images/artist/aac156dcbdac96963e7e20a5b8285087/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Kaufe nichts ficke niemand",
-      "preview": "previews/Raumfisch.mp3?v=1774311427"
-    },
-    {
-      "name": "Billy Talent",
-      "genre": "Punk Rock",
-      "deezer": "2kCDVxSRso0RSVIL5K99JR",
-      "img": "https://cdn-images.dzcdn.net/images/artist/85a34aefba04a1223ff1d6b0fe08fc63/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Red Flag",
-      "preview": "previews/Billy-Talent.mp3?v=1774311427"
-    },
-    {
-      "name": "Tiavo",
-      "genre": "Pop/Indie",
-      "img": "https://cdn-images.dzcdn.net/images/artist/3e4ee145102dfc35705c11a1bc76e87b/250x250-000000-80-0-0.jpg",
-      "trackTitle": "underwater aerobic",
-      "preview": "previews/Tiavo.mp3?v=1774311427"
-    },
-    {
-      "name": "Farber",
-      "genre": "Indie/Rock",
-      "img": "https://cdn-images.dzcdn.net/images/artist/d3654c0c357969829e8eee1c82418e5a/250x250-000000-80-0-0.jpg",
-      "trackTitle": "All die schönen Worte",
-      "preview": "previews/Farber.mp3?v=1774311427"
-    },
-    {
-      "name": "JBS",
-      "genre": "Rap",
-      "img": "https://cdn-images.dzcdn.net/images/artist/0e2038ae4d8a2d068a6ad35a023cda56/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Gewitter",
-      "preview": "previews/JBS.mp3?v=1774336914"
-    },
-    {
-      "name": "grandson",
-      "genre": "Alt Rock",
-      "img": "https://cdn-images.dzcdn.net/images/artist/46be123131f61e8e359c8b05248290b5/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Blood // Water",
-      "preview": "previews/grandson.mp3?v=1774336960"
-    },
-    {
-      "name": "Bad Omens",
-      "genre": "Metalcore",
-      "img": "https://cdn-images.dzcdn.net/images/artist/8a185a7bd12ca20bb8d9e01ea699467d/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Nowhere To Go",
-      "preview": "previews/Bad-Omens.mp3?v=1774337004"
-    },
-    {
-      "name": "Crystal F",
-      "genre": "Rap",
-      "img": "https://cdn-images.dzcdn.net/images/artist/ccefb5c064919ff0e2d63caa65cd5d96/250x250-000000-80-0-0.jpg",
-      "trackTitle": "lieblos",
-      "preview": "previews/Crystal-F.mp3?v=1774568683"
-    },
-    {
-      "name": "Moonkid",
-      "genre": "Indie",
-      "img": "https://cdn-images.dzcdn.net/images/artist/1a49dfc8ed03871d665b66769e1b984d/250x250-000000-80-0-0.jpg",
-      "trackTitle": "LEBENSLAUF",
-      "preview": "previews/Moonkid.mp3?v=1774568683"
-    },
-    {
-      "name": "Error",
-      "genre": "Punk",
-      "img": "https://cdn-images.dzcdn.net/images/artist/76281fdb869723e1d86e9eff2ce0cee7/250x250-000000-80-0-0.jpg",
-      "trackTitle": "FLUCHTPUNKT",
-      "preview": "previews/Error.mp3?v=1774568683"
-    },
-    {
-      "name": "Mehnersmoos",
-      "genre": "Indie/Folk",
-      "img": "https://cdn-images.dzcdn.net/images/artist/b24f81d0a08808f49dff0c0877919eb6/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Nachteule",
-      "preview": "previews/Mehnersmoos.mp3?v=1774568683"
-    },
-    {
-      "name": "Drunken Masters",
-      "genre": "Hip-Hop",
-      "img": "https://cdn-images.dzcdn.net/images/artist/3ac816deb64f6877c77abb3cac982bc3/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Bauchnabelpiercing",
-      "preview": "previews/Drunken-Masters.mp3?v=1774568683"
-    },
-    {
-      "name": "8kids",
-      "genre": "Punk Rock",
-      "img": "https://cdn-images.dzcdn.net/images/artist/1bd50fe0d686877da989a795887e3d47/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Wir bleiben Kids (feat. Swiss)",
-      "preview": "previews/8kids.mp3?v=1774568683"
+      "img": "https://cdn-images.dzcdn.net/images/artist/d7d6b0842d554fb46738042c80d99999/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Astronaut",
+      "preview": "previews/Marlo-Grosshardt.mp3?v=1774568683"
     },
     {
       "name": "Marteria",
@@ -266,11 +223,33 @@
       "preview": "previews/Marteria.mp3?v=1774568683"
     },
     {
-      "name": "Alligatoah",
-      "genre": "Hip-Hop/Rock",
-      "img": "https://cdn-images.dzcdn.net/images/artist/5c52e9795414734e1471d00efd48d430/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Willst du",
-      "preview": "previews/Alligatoah.mp3?v=1774568683"
+      "name": "Mehnersmoos",
+      "genre": "Indie/Folk",
+      "img": "https://cdn-images.dzcdn.net/images/artist/b24f81d0a08808f49dff0c0877919eb6/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Nachteule",
+      "preview": "previews/Mehnersmoos.mp3?v=1774568683"
+    },
+    {
+      "name": "Moonkid",
+      "genre": "Indie",
+      "img": "https://cdn-images.dzcdn.net/images/artist/1a49dfc8ed03871d665b66769e1b984d/250x250-000000-80-0-0.jpg",
+      "trackTitle": "LEBENSLAUF",
+      "preview": "previews/Moonkid.mp3?v=1774568683"
+    },
+    {
+      "name": "OK KID",
+      "genre": "Indie/Electro",
+      "deezer": "1MihhgXkTahISnNmRFktlM",
+      "img": "https://cdn-images.dzcdn.net/images/artist/f30bf029459eedbcb4dd7cbc2a35a968/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Rave On",
+      "preview": "previews/OK-KID.mp3?v=1774311427"
+    },
+    {
+      "name": "PA69",
+      "genre": "Punk",
+      "img": "https://cdn-images.dzcdn.net/images/artist/5ffaf19a24872f7abb9b9e8c9510fcb1/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Komplett Blau",
+      "preview": "previews/PA69.mp3?v=1774568683"
     },
     {
       "name": "Paula Carolina",
@@ -280,32 +259,53 @@
       "preview": "previews/Paula-Carolina.mp3?v=1774568683"
     },
     {
-      "name": "Kummer",
-      "genre": "Indie/Rap",
-      "img": "https://cdn-images.dzcdn.net/images/artist/9b0b56d00929d386dc003bfb1939aaaf/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Bei Dir",
-      "preview": "previews/Kummer.mp3?v=1774568683"
+      "name": "Paula Hartmann",
+      "genre": "Pop/R&B",
+      "deezer": "6gU2lzMPisjOmHlEN9FFJX",
+      "track": "Schwarze SUVs",
+      "img": "https://cdn-images.dzcdn.net/images/artist/782fabbc3174b6842468e1476d6d6ed9/250x250-000000-80-0-0.jpg",
+      "trackTitle": "schwarze SUVs",
+      "preview": "previews/Paula-Hartmann.mp3?v=1774311427"
     },
     {
-      "name": "Juse Ju",
-      "genre": "Rap",
-      "img": "https://cdn-images.dzcdn.net/images/artist/e5f448aafbc633491e6076ccb6c81ff7/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Lovesongs",
-      "preview": "previews/Juse-Ju.mp3?v=1774568683"
-    },
-    {
-      "name": "Marlo Grosshardt",
+      "name": "Raumfisch",
       "genre": "Indie",
-      "img": "https://cdn-images.dzcdn.net/images/artist/d7d6b0842d554fb46738042c80d99999/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Astronaut",
-      "preview": "previews/Marlo-Grosshardt.mp3?v=1774568683"
+      "deezer": "5wVFbzJNBZNkaq5rN9zxGD",
+      "img": "https://cdn-images.dzcdn.net/images/artist/aac156dcbdac96963e7e20a5b8285087/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Kaufe nichts ficke niemand",
+      "preview": "previews/Raumfisch.mp3?v=1774311427"
     },
     {
-      "name": "PA69",
-      "genre": "Punk",
-      "img": "https://cdn-images.dzcdn.net/images/artist/5ffaf19a24872f7abb9b9e8c9510fcb1/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Komplett Blau",
-      "preview": "previews/PA69.mp3?v=1774568683"
+      "name": "Rogers",
+      "genre": "Punk Rock",
+      "deezer": "41bJHheI00sy9FPneBtjBa",
+      "img": "https://cdn-images.dzcdn.net/images/artist/dadcb094b958da3ffe930b447b4405ad/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Mittelfinger für immer",
+      "preview": "previews/Rogers.mp3?v=1774311427"
+    },
+    {
+      "name": "Tiavo",
+      "genre": "Pop/Indie",
+      "img": "https://cdn-images.dzcdn.net/images/artist/3e4ee145102dfc35705c11a1bc76e87b/250x250-000000-80-0-0.jpg",
+      "trackTitle": "underwater aerobic",
+      "preview": "previews/Tiavo.mp3?v=1774311427"
+    },
+    {
+      "name": "VON WELT",
+      "genre": "Rap",
+      "deezer": "5byLzOPqrzLxdbcTjRbnFV",
+      "img": "https://cdn-images.dzcdn.net/images/artist/7bab892285bcf5269009bda2a3cc16d7/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Fata Morgana",
+      "preview": "previews/VON-WELT.mp3?v=1774311427"
+    },
+    {
+      "name": "Zirkel",
+      "genre": "Deutschrap",
+      "deezer": "3ZVjA9LMKyghKJcSyRhaid",
+      "track": "Dorn",
+      "img": "https://cdn-images.dzcdn.net/images/artist/ab3526a996738e1b856d4f14a5263744/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Wenn Fynn Kliemann alles kann",
+      "preview": "previews/Zirkel.mp3?v=1774311427"
     }
   ],
   "seen": [
