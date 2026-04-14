@@ -1,5 +1,8 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { cookies } from 'next/headers';
+import { getUserByToken } from '@/lib/auth';
+import Header from '@/components/Header';
 
 export const metadata: Metadata = {
   title: 'Setlist - Song Diary',
@@ -9,7 +12,15 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const cookieStore = await cookies();
+  const token = cookieStore.get('session-token')?.value;
+  const currentUser = token ? getUserByToken(token) : null;
+
+  const authUser = currentUser
+    ? { id: currentUser.id, username: currentUser.username, display_name: currentUser.display_name }
+    : null;
+
   return (
     <html lang="de">
       <head>
@@ -22,7 +33,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen antialiased">{children}</body>
+      <body className="min-h-screen antialiased">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="flex items-center justify-between pt-4 pb-2">
+            <a href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+              <span className="text-xl">🎸</span>
+              <span className="text-base font-black font-[family-name:var(--font-display)] uppercase tracking-tight">
+                Setlist
+              </span>
+            </a>
+            <Header currentUser={authUser} />
+          </div>
+        </div>
+        {children}
+      </body>
     </html>
   );
 }

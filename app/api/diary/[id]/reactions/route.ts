@@ -1,4 +1,5 @@
 import { getDb } from '@/lib/db';
+import { getSessionUserFromRequest } from '@/lib/auth';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(
@@ -11,8 +12,13 @@ export async function POST(
     return NextResponse.json({ error: 'Invalid entry ID' }, { status: 400 });
   }
 
+  const currentUser = getSessionUserFromRequest(req);
+  if (!currentUser) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   const body = await req.json();
-  const { emoji, reactor_name = 'anonymous' } = body;
+  const { emoji } = body;
 
   const allowedEmojis = ['🔥', '❤️', '🎸', '🤘', '💜', '🎵'];
   if (!emoji || !allowedEmojis.includes(emoji)) {
@@ -25,9 +31,10 @@ export async function POST(
     return NextResponse.json({ error: 'Entry not found' }, { status: 404 });
   }
 
+  const reactorName = currentUser.username;
   const existing = db.prepare(
     'SELECT id, emoji FROM reactions WHERE diary_entry_id = ? AND reactor_name = ?'
-  ).get(entryId, reactor_name) as { id: number; emoji: string } | undefined;
+  ).get(entryId, reactorName) as { id: number; emoji: string } | undefined;
 
   if (existing) {
     if (existing.emoji === emoji) {
@@ -38,7 +45,7 @@ export async function POST(
   } else {
     db.prepare(
       'INSERT INTO reactions (diary_entry_id, emoji, reactor_name) VALUES (?, ?, ?)'
-    ).run(entryId, emoji, reactor_name);
+    ).run(entryId, emoji, reactorName);
   }
 
   const reactions = db

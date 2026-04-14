@@ -1,6 +1,8 @@
 import { getDb } from '@/lib/db';
 import type { User, DiaryEntry, LiveEvent, WishlistItem, Reaction } from '@/lib/db';
 import { notFound } from 'next/navigation';
+import { cookies } from 'next/headers';
+import { getUserByToken } from '@/lib/auth';
 import ProfileClient from '@/components/ProfileClient';
 
 type DiaryWithReactions = DiaryEntry & { reactions: Reaction[] };
@@ -53,6 +55,14 @@ export default async function ProfilePage({
     .prepare('SELECT * FROM wishlist WHERE user_id = ? ORDER BY artist_name ASC')
     .all(user.id) as WishlistItem[];
 
+  // Determine who is logged in
+  const cookieStore = await cookies();
+  const token = cookieStore.get('session-token')?.value;
+  const sessionUser = token ? getUserByToken(token) : null;
+  const currentUser = sessionUser
+    ? { id: sessionUser.id, username: sessionUser.username, display_name: sessionUser.display_name }
+    : null;
+
   return (
     <ProfileClient
       user={user}
@@ -60,6 +70,7 @@ export default async function ProfilePage({
       live={live}
       wishlist={wishlist}
       initialTab={initialTab}
+      currentUser={currentUser}
     />
   );
 }

@@ -26,6 +26,17 @@ function initSchema(db: Database.Database) {
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
 
+    CREATE TABLE IF NOT EXISTS sessions (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      token TEXT UNIQUE NOT NULL,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      expires_at DATETIME NOT NULL
+    );
+
+    CREATE INDEX IF NOT EXISTS idx_sessions_token ON sessions(token);
+    CREATE INDEX IF NOT EXISTS idx_sessions_user ON sessions(user_id);
+
     CREATE TABLE IF NOT EXISTS diary_entries (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       user_id INTEGER NOT NULL REFERENCES users(id),
@@ -80,6 +91,12 @@ function initSchema(db: Database.Database) {
     CREATE INDEX IF NOT EXISTS idx_reactions_entry ON reactions(diary_entry_id);
     CREATE UNIQUE INDEX IF NOT EXISTS idx_reactions_unique ON reactions(diary_entry_id, reactor_name);
   `);
+
+  // Add password_hash column if it doesn't exist (migration for existing DBs)
+  const cols = db.prepare("PRAGMA table_info(users)").all() as { name: string }[];
+  if (!cols.some((c) => c.name === 'password_hash')) {
+    db.exec('ALTER TABLE users ADD COLUMN password_hash TEXT');
+  }
 }
 
 export type User = {
@@ -88,7 +105,16 @@ export type User = {
   display_name: string | null;
   bio: string | null;
   avatar_url: string | null;
+  password_hash: string | null;
   created_at: string;
+};
+
+export type Session = {
+  id: number;
+  user_id: number;
+  token: string;
+  created_at: string;
+  expires_at: string;
 };
 
 export type DiaryEntry = {

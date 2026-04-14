@@ -8,8 +8,7 @@ type DiaryWithReactions = DiaryEntry & { reactions: Reaction[] };
 
 type Tab = 'overview' | 'diary' | 'live' | 'wishlist';
 
-const CURRENT_USER_ID = 1;
-const CURRENT_REACTOR = 'logge';
+type CurrentUser = { id: number; username: string; display_name: string | null } | null;
 
 function hue(name: string): number {
   let h = 0;
@@ -116,9 +115,11 @@ function MoodTag({ mood }: { mood: string | null }) {
 function ReactionBar({
   entryId,
   reactions: initialReactions,
+  currentUsername,
 }: {
   entryId: number;
   reactions: Reaction[];
+  currentUsername: string | null;
 }) {
   const [reactions, setReactions] = useState(initialReactions);
   const emojis = ['🔥', '❤️', '🎸', '🤘', '💜', '🎵'];
@@ -134,13 +135,16 @@ function ReactionBar({
     {} as Record<string, { count: number; names: string[] }>
   );
 
-  const myReaction = reactions.find((r) => r.reactor_name === CURRENT_REACTOR)?.emoji;
+  const myReaction = currentUsername
+    ? reactions.find((r) => r.reactor_name === currentUsername)?.emoji
+    : undefined;
 
   async function addReaction(emoji: string) {
+    if (!currentUsername) return;
     const res = await fetch(`/api/diary/${entryId}/reactions`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ emoji, reactor_name: CURRENT_REACTOR }),
+      body: JSON.stringify({ emoji }),
     });
     if (res.ok) {
       const updated = await res.json();
@@ -157,14 +161,21 @@ function ReactionBar({
           <button
             key={emoji}
             onClick={() => addReaction(emoji)}
+            disabled={!currentUsername}
             className={`text-xs px-2 py-0.5 rounded-full transition-colors ${
               isMyReaction
                 ? 'bg-pink/20 ring-1 ring-pink/40'
                 : data
                   ? 'bg-white/10 hover:bg-white/20'
                   : 'bg-transparent hover:bg-white/5 opacity-40 hover:opacity-70'
-            }`}
-            title={data ? data.names.join(', ') : ''}
+            } disabled:cursor-default`}
+            title={
+              !currentUsername
+                ? 'Log in to react'
+                : data
+                  ? data.names.join(', ')
+                  : ''
+            }
           >
             {emoji} {data ? data.count : ''}
           </button>
@@ -174,7 +185,7 @@ function ReactionBar({
   );
 }
 
-function DiaryEntryCard({ entry }: { entry: DiaryWithReactions }) {
+function DiaryEntryCard({ entry, currentUsername }: { entry: DiaryWithReactions; currentUsername: string | null }) {
   const date = new Date(entry.listened_at);
   const dateStr = date.toLocaleDateString('de-DE', {
     day: '2-digit',
@@ -204,7 +215,7 @@ function DiaryEntryCard({ entry }: { entry: DiaryWithReactions }) {
           )}
           {entry.note && <p className="text-xs text-text-muted mt-2 italic">&ldquo;{entry.note}&rdquo;</p>}
           <div className="flex items-center justify-between mt-3 gap-2">
-            <ReactionBar entryId={entry.id} reactions={entry.reactions} />
+            <ReactionBar entryId={entry.id} reactions={entry.reactions} currentUsername={currentUsername} />
             <time className="text-[0.65rem] text-text-muted shrink-0">{dateStr}</time>
           </div>
         </div>
@@ -341,13 +352,7 @@ function TrackSearch({ artistName, onSelect }: { artistName: string; onSelect: (
   );
 }
 
-function AddDiaryForm({
-  username,
-  onAdded,
-}: {
-  username: string;
-  onAdded: (entry: DiaryWithReactions) => void;
-}) {
+function AddDiaryForm({ onAdded }: { onAdded: (entry: DiaryWithReactions) => void }) {
   const [open, setOpen] = useState(false);
   const [saving, setSaving] = useState(false);
   const [selectedArtist, setSelectedArtist] = useState<DeezerArtist | null>(null);
@@ -387,7 +392,6 @@ function AddDiaryForm({
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        username,
         artist_name: formData.artist_name,
         artist_img: formData.artist_img || null,
         track_title: formData.track_title,
@@ -535,12 +539,14 @@ function OverviewTab({
   live,
   wishlist,
   onTabChange,
+  currentUsername,
 }: {
   user: User;
   diary: DiaryWithReactions[];
   live: LiveEvent[];
   wishlist: WishlistItem[];
   onTabChange: (tab: Tab) => void;
+  currentUsername: string | null;
 }) {
   const recentDiary = diary.slice(0, 5);
   const genres = [...diary, ...live, ...wishlist]
@@ -595,7 +601,7 @@ function OverviewTab({
           </div>
           <div className="space-y-3">
             {recentDiary.map((entry) => (
-              <DiaryEntryCard key={entry.id} entry={entry} />
+              <DiaryEntryCard key={entry.id} entry={entry} currentUsername={currentUsername} />
             ))}
           </div>
         </div>
@@ -604,17 +610,22 @@ function OverviewTab({
   );
 }
 
-function DiaryTab({ diary, username }: { diary: DiaryWithReactions[]; username: string }) {
+function DiaryTab({
+  diary,
+  isOwner,
+  currentUsername,
+}: {
+  diary: DiaryWithReactions[];
+  isOwner: boolean;
+  currentUsername: string | null;
+}) {
   const [entries, setEntries] = useState(diary);
 
   return (
     <div className="space-y-3">
-      <AddDiaryForm
-        username={username}
-        onAdded={(entry) => setEntries([entry, ...entries])}
-      />
+      {isOwner && <AddDiaryForm onAdded={(entry) => setEntries([entry, ...entries])} />}
       {entries.map((entry) => (
-        <DiaryEntryCard key={entry.id} entry={entry} />
+        <DiaryEntryCard key={entry.id} entry={entry} currentUsername={currentUsername} />
       ))}
       {entries.length === 0 && (
         <div className="text-center text-text-muted py-12">
@@ -640,7 +651,7 @@ function AddToWishlistButton({ artist_name, artist_img, genre, track_title, prev
     const res = await fetch('/api/wishlist', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ user_id: CURRENT_USER_ID, artist_name, artist_img, genre, track_title, preview_url }),
+      body: JSON.stringify({ artist_name, artist_img, genre, track_title, preview_url }),
     });
     if (res.status === 409) {
       setStatus('exists');
@@ -907,17 +918,22 @@ export default function ProfileClient({
   live,
   wishlist,
   initialTab,
+  currentUser,
 }: {
   user: User;
   diary: DiaryWithReactions[];
   live: LiveEvent[];
   wishlist: WishlistItem[];
   initialTab: Tab;
+  currentUser: CurrentUser;
 }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState<Tab>(initialTab);
+
+  const isOwner = currentUser?.id === user.id;
+  const currentUsername = currentUser?.username ?? null;
 
   useEffect(() => {
     setActiveTab(initialTab);
@@ -937,14 +953,8 @@ export default function ProfileClient({
 
   return (
     <div className="max-w-5xl mx-auto px-4 pb-24 md:pb-8">
-      {/* Header */}
-      <header className="pt-6 pb-4">
-        <div className="flex items-center gap-2 mb-6">
-          <span className="text-2xl">🎸</span>
-          <h1 className="text-lg font-black font-[family-name:var(--font-display)] uppercase tracking-tight">
-            Setlist
-          </h1>
-        </div>
+      {/* Profile Header */}
+      <header className="pt-4 pb-4">
         <div className="flex items-center gap-4">
           <div
             className="w-16 h-16 rounded-full flex items-center justify-center text-2xl font-black text-white"
@@ -983,9 +993,18 @@ export default function ProfileClient({
       {/* Content */}
       <main>
         {activeTab === 'overview' && (
-          <OverviewTab user={user} diary={diary} live={live} wishlist={wishlist} onTabChange={changeTab} />
+          <OverviewTab
+            user={user}
+            diary={diary}
+            live={live}
+            wishlist={wishlist}
+            onTabChange={changeTab}
+            currentUsername={currentUsername}
+          />
         )}
-        {activeTab === 'diary' && <DiaryTab diary={diary} username={user.username} />}
+        {activeTab === 'diary' && (
+          <DiaryTab diary={diary} isOwner={isOwner} currentUsername={currentUsername} />
+        )}
         {activeTab === 'live' && <LiveTab live={live} />}
         {activeTab === 'wishlist' && <WishlistTab wishlist={wishlist} userId={user.id} />}
       </main>
