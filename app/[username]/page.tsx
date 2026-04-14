@@ -5,12 +5,21 @@ import ProfileClient from '@/components/ProfileClient';
 
 type DiaryWithReactions = DiaryEntry & { reactions: Reaction[] };
 
+const VALID_TABS = new Set(['overview', 'diary', 'live', 'wishlist']);
+
 export default async function ProfilePage({
   params,
+  searchParams,
 }: {
   params: Promise<{ username: string }>;
+  searchParams?: Promise<{ tab?: string }>;
 }) {
   const { username } = await params;
+  const resolvedSearchParams = searchParams ? await searchParams : undefined;
+  const initialTab = VALID_TABS.has(resolvedSearchParams?.tab || '')
+    ? (resolvedSearchParams?.tab as 'overview' | 'diary' | 'live' | 'wishlist')
+    : 'overview';
+
   const db = getDb();
 
   const user = db
@@ -50,6 +59,7 @@ export default async function ProfilePage({
       diary={diaryWithReactions}
       live={live}
       wishlist={wishlist}
+      initialTab={initialTab}
     />
   );
 }

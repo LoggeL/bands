@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useEffect } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import type { User, DiaryEntry, LiveEvent, WishlistItem, Reaction } from '@/lib/db';
 
 type DiaryWithReactions = DiaryEntry & { reactions: Reaction[] };
@@ -515,13 +516,34 @@ export default function ProfileClient({
   diary,
   live,
   wishlist,
+  initialTab,
 }: {
   user: User;
   diary: DiaryWithReactions[];
   live: LiveEvent[];
   wishlist: WishlistItem[];
+  initialTab: Tab;
 }) {
-  const [activeTab, setActiveTab] = useState<Tab>('overview');
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const [activeTab, setActiveTab] = useState<Tab>(initialTab);
+
+  useEffect(() => {
+    setActiveTab(initialTab);
+  }, [initialTab]);
+
+  function changeTab(tab: Tab) {
+    setActiveTab(tab);
+    const params = new URLSearchParams(searchParams?.toString() || '');
+    if (tab === 'overview') {
+      params.delete('tab');
+    } else {
+      params.set('tab', tab);
+    }
+    const query = params.toString();
+    router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
+  }
 
   return (
     <div className="max-w-2xl mx-auto px-4 pb-24 md:pb-8">
@@ -555,7 +577,7 @@ export default function ProfileClient({
         {tabs.map((tab) => (
           <button
             key={tab.key}
-            onClick={() => setActiveTab(tab.key)}
+            onClick={() => changeTab(tab.key)}
             className={`flex items-center gap-1.5 px-4 py-3 text-sm font-semibold transition-colors border-b-2 -mb-px ${
               activeTab === tab.key
                 ? 'text-pink border-pink'
@@ -571,7 +593,7 @@ export default function ProfileClient({
       {/* Content */}
       <main>
         {activeTab === 'overview' && (
-          <OverviewTab user={user} diary={diary} live={live} wishlist={wishlist} onTabChange={setActiveTab} />
+          <OverviewTab user={user} diary={diary} live={live} wishlist={wishlist} onTabChange={changeTab} />
         )}
         {activeTab === 'diary' && <DiaryTab diary={diary} username={user.username} />}
         {activeTab === 'live' && <LiveTab live={live} />}
@@ -584,7 +606,7 @@ export default function ProfileClient({
           {tabs.map((tab) => (
             <button
               key={tab.key}
-              onClick={() => setActiveTab(tab.key)}
+              onClick={() => changeTab(tab.key)}
               className={`flex flex-col items-center gap-0.5 px-3 py-1.5 text-[0.6rem] font-semibold transition-colors ${
                 activeTab === tab.key ? 'text-pink' : 'text-text-muted'
               }`}
