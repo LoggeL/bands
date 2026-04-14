@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0e0e11;
+  --color-bg-card: #18181b;
+  --color-bg-hover: #232328;
+  --color-border: #2a2a30;
+  --color-pink: #ff8aa9;
+  --color-green: #2ff801;
+  --color-cyan: #a1faff;
+  --color-text: #e4e4e7;
+  --color-text-muted: #71717a;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Manrope", sans-serif;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+.mood-tag {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+.mood-energized { background: #ff8aa920; color: #ff8aa9; }
+.mood-nostalgic { background: #c084fc20; color: #c084fc; }
+.mood-chill { background: #a1faff20; color: #a1faff; }
+.mood-melancholic { background: #60a5fa20; color: #60a5fa; }
+.mood-hyped { background: #2ff80120; color: #2ff801; }
+.mood-reflective { background: #fbbf2420; color: #fbbf24; }
+
+.glass {
+  background: rgba(24, 24, 27, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+}

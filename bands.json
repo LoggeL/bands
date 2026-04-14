@@ -8,13 +8,6 @@
       "preview": "previews/8kids.mp3?v=1774568683"
     },
     {
-      "name": "Alligatoah",
-      "genre": "Hip-Hop/Rock",
-      "img": "https://cdn-images.dzcdn.net/images/artist/5c52e9795414734e1471d00efd48d430/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Willst du",
-      "preview": "previews/Alligatoah.mp3?v=1774568683"
-    },
-    {
       "name": "Antifuchs",
       "genre": "Deutschrap",
       "deezer": "0Y6dGpR4T4kWjmOkDQxtfK",
@@ -76,13 +69,6 @@
       "img": "https://cdn-images.dzcdn.net/images/artist/3e0c7da89fc461b44f0a5e72be69d8d0/250x250-000000-80-0-0.jpg",
       "trackTitle": "Zeit aus dem Fenster",
       "preview": "previews/Deichkind.mp3?v=1774311427"
-    },
-    {
-      "name": "Drunken Masters",
-      "genre": "Hip-Hop",
-      "img": "https://cdn-images.dzcdn.net/images/artist/3ac816deb64f6877c77abb3cac982bc3/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Bauchnabelpiercing",
-      "preview": "previews/Drunken-Masters.mp3?v=1774568683"
     },
     {
       "name": "Error",
@@ -223,13 +209,6 @@
       "preview": "previews/Marteria.mp3?v=1774568683"
     },
     {
-      "name": "Mehnersmoos",
-      "genre": "Indie/Folk",
-      "img": "https://cdn-images.dzcdn.net/images/artist/b24f81d0a08808f49dff0c0877919eb6/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Nachteule",
-      "preview": "previews/Mehnersmoos.mp3?v=1774568683"
-    },
-    {
       "name": "Moonkid",
       "genre": "Indie",
       "img": "https://cdn-images.dzcdn.net/images/artist/4284d7479fea6b1a05a30ab30e6aca20/250x250-000000-80-0-0.jpg",
@@ -306,6 +285,21 @@
       "img": "https://cdn-images.dzcdn.net/images/artist/ab3526a996738e1b856d4f14a5263744/250x250-000000-80-0-0.jpg",
       "trackTitle": "Wenn Fynn Kliemann alles kann",
       "preview": "previews/Zirkel.mp3?v=1774311427"
+    },
+    {
+      "name": "HBZ",
+      "genre": "Electronic / Dance",
+      "img": "https://cdn-images.dzcdn.net/images/artist/47f7b8da984728fb0a8c86c0c23aa89b/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Erinner mich",
+      "preview": "previews/hbz.mp3?v=1775252380"
+    },
+    {
+      "name": "Bruchbude",
+      "genre": "Punk",
+      "deezer": "0Fp9pg7U4Rwq8nYup2wxig",
+      "img": "https://cdn-images.dzcdn.net/images/artist/ca9d8beeec00711509dda496875174ee/250x250-000000-80-0-0.jpg",
+      "trackTitle": "abgefucked",
+      "preview": "previews/Bruchbude.mp3?v=1774311427"
     }
   ],
   "seen": [
@@ -607,13 +601,25 @@
       "note": "Rock am Ring / Southside, 2025"
     },
     {
-      "name": "Bruchbude",
-      "genre": "Punk",
-      "deezer": "0Fp9pg7U4Rwq8nYup2wxig",
-      "img": "https://cdn-images.dzcdn.net/images/artist/ca9d8beeec00711509dda496875174ee/250x250-000000-80-0-0.jpg",
-      "trackTitle": "abgefucked",
-      "preview": "previews/Bruchbude.mp3?v=1774311427",
-      "note": "Alte Feuerwache Mannheim, 28.03.2025"
+      "name": "Alligatoah",
+      "genre": "Hip-Hop/Rock",
+      "img": "https://cdn-images.dzcdn.net/images/artist/5c52e9795414734e1471d00efd48d430/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Willst du",
+      "preview": "previews/Alligatoah.mp3?v=1774568683"
+    },
+    {
+      "name": "Drunken Masters",
+      "genre": "Hip-Hop",
+      "img": "https://cdn-images.dzcdn.net/images/artist/3ac816deb64f6877c77abb3cac982bc3/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Bauchnabelpiercing",
+      "preview": "previews/Drunken-Masters.mp3?v=1774568683"
+    },
+    {
+      "name": "Mehnersmoos",
+      "genre": "Indie/Folk",
+      "img": "https://cdn-images.dzcdn.net/images/artist/b24f81d0a08808f49dff0c0877919eb6/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Nachteule",
+      "preview": "previews/Mehnersmoos.mp3?v=1774568683"
     }
   ]
 }
