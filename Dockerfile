@@ -1,5 +1,5 @@
-FROM node:20-alpine AS base
-RUN apk add --no-cache libc6-compat python3 make g++
+FROM node:20-bookworm-slim AS base
+RUN apt-get update && apt-get install -y python3 make g++ && rm -rf /var/lib/apt/lists/*
 
 FROM base AS deps
 WORKDIR /app
@@ -13,10 +13,10 @@ COPY . .
 RUN npm run seed
 RUN npm run build
 
-FROM base AS runner
+FROM node:20-bookworm-slim AS runner
 WORKDIR /app
 ENV NODE_ENV=production
-RUN addgroup --system --gid 1001 nodejs && adduser --system --uid 1001 nextjs
+RUN groupadd --system --gid 1001 nodejs && useradd --system --uid 1001 --gid 1001 nextjs
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
