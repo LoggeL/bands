@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json();
-  const { artist_name, artist_img, genre, track_title, preview_url } = body;
+  const { artist_name, artist_img, album_cover_url, genre, track_title, preview_url } = body;
 
   if (!artist_name) {
     return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
@@ -25,12 +25,13 @@ export async function POST(req: NextRequest) {
   }
 
   const result = db.prepare(
-    `INSERT INTO wishlist (user_id, artist_name, artist_img, genre, track_title, preview_url)
-     VALUES (?, ?, ?, ?, ?, ?)`
+    `INSERT INTO wishlist (user_id, artist_name, artist_img, album_cover_url, genre, track_title, preview_url)
+     VALUES (?, ?, ?, ?, ?, ?, ?)`
   ).run(
     currentUser.id,
     artist_name,
     artist_img || null,
+    album_cover_url || null,
     genre || null,
     track_title || null,
     preview_url || null

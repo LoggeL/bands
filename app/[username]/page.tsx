@@ -1,76 +1,47 @@
-import { getDb } from '@/lib/db';
-import type { User, DiaryEntry, LiveEvent, WishlistItem, Reaction } from '@/lib/db';
-import { notFound } from 'next/navigation';
-import { cookies } from 'next/headers';
-import { getUserByToken } from '@/lib/auth';
-import ProfileClient from '@/components/ProfileClient';
+import { loadProfileContext } from '@/lib/profile';
+import ProfileHeader from '@/components/shared/ProfileHeader';
+import BlockedNotice from '@/components/shared/BlockedNotice';
 
-type DiaryWithReactions = DiaryEntry & { reactions: Reaction[] };
-
-const VALID_TABS = new Set(['overview', 'diary', 'live', 'wishlist']);
-
-export default async function ProfilePage({
+export default async function ProfileOverview({
   params,
-  searchParams,
 }: {
   params: Promise<{ username: string }>;
-  searchParams?: Promise<{ tab?: string }>;
 }) {
   const { username } = await params;
-  const resolvedSearchParams = searchParams ? await searchParams : undefined;
-  const initialTab = VALID_TABS.has(resolvedSearchParams?.tab || '')
-    ? (resolvedSearchParams?.tab as 'overview' | 'diary' | 'live' | 'wishlist')
-    : 'overview';
-
-  const db = getDb();
-
-  const user = db
-    .prepare('SELECT * FROM users WHERE username = ?')
-    .get(username) as User | undefined;
-
-  if (!user) notFound();
-
-  const diary = db
-    .prepare('SELECT * FROM diary_entries WHERE user_id = ? ORDER BY listened_at DESC')
-    .all(user.id) as DiaryEntry[];
-
-  const reactions = diary.length > 0
-    ? (db
-        .prepare(
-          `SELECT * FROM reactions WHERE diary_entry_id IN (${diary.map(() => '?').join(',')})`
-        )
-        .all(...diary.map((d) => d.id)) as Reaction[])
-    : [];
-
-  const diaryWithReactions: DiaryWithReactions[] = diary.map((entry) => ({
-    ...entry,
-    reactions: reactions.filter((r) => r.diary_entry_id === entry.id),
-  }));
-
-  const live = db
-    .prepare('SELECT * FROM live_events WHERE user_id = ? ORDER BY created_at DESC')
-    .all(user.id) as LiveEvent[];
-
-  const wishlist = db
-    .prepare('SELECT * FROM wishlist WHERE user_id = ? ORDER BY artist_name ASC')
-    .all(user.id) as WishlistItem[];
-
-  // Determine who is logged in
-  const cookieStore = await cookies();
-  const token = cookieStore.get('session-token')?.value;
-  const sessionUser = token ? getUserByToken(token) : null;
-  const currentUser = sessionUser
-    ? { id: sessionUser.id, username: sessionUser.username, display_name: sessionUser.display_name }
-    : null;
+  const ctx = await loadProfileContext(username);
 
   return (
-    <ProfileClient
-      user={user}
-      diary={diaryWithReactions}
-      live={live}
-      wishlist={wishlist}
-      initialTab={initialTab}
-      currentUser={currentUser}
-    />
+    <div className="max-w-3xl mx-auto px-4 pb-16">
+      <ProfileHeader
+        user={ctx.owner}
+        counts={ctx.counts}
+        friendCount={ctx.friendCount}
+        friendState={ctx.friendState}
+        active="overview"
+        isOwner={ctx.isOwner}
+      />
+
+      {!ctx.visible ? (
+        <BlockedNotice visibility={ctx.owner.visibility} />
+      ) : (
+        <section className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+          <Stat label="Tagebuch" value={ctx.counts.diary} hint="Einträge" />
+          <Stat label="Bands" value={ctx.counts.artists} hint="gehört & gesehen" />
+          <Stat label="Live" value={ctx.counts.live} hint="Konzerte" />
+          <Stat label="Wunschliste" value={ctx.counts.wishlist} hint="Wünsche" />
+          <Stat label="Freunde" value={ctx.friendCount} hint="bestätigt" />
+        </section>
+      )}
+    </div>
+  );
+}
+
+function Stat({ label, value, hint }: { label: string; value: number; hint: string }) {
+  return (
+    <div className="block p-4 stripe">
+      <p className="mono text-[0.66rem] uppercase tracking-[0.22em] opacity-70">{label}</p>
+      <p className="serif text-[2.4rem] leading-none font-medium mono-num mt-2">{value}</p>
+      <p className="text-[0.72rem] opacity-65 mt-1">{hint}</p>
+    </div>
   );
 }

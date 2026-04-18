@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 type AuthUser = {
@@ -10,40 +10,16 @@ type AuthUser = {
   display_name: string | null;
 };
 
-const VOLUME_KEY = 'setlist-volume';
-
-export function usePreviewVolume() {
-  const [volume, setVolume] = useState(() => {
-    if (typeof window === 'undefined') return 0.7;
-    const stored = localStorage.getItem(VOLUME_KEY);
-    return stored !== null ? parseFloat(stored) : 0.7;
-  });
-
-  useEffect(() => {
-    // Dispatch a custom event so any playing AudioButton can pick up the change
-    localStorage.setItem(VOLUME_KEY, String(volume));
-    window.dispatchEvent(new CustomEvent('setlist-volume-change', { detail: volume }));
-  }, [volume]);
-
-  return [volume, setVolume] as const;
-}
-
-export default function Header({ currentUser }: { currentUser: AuthUser | null }) {
+export default function Header({
+  currentUser,
+  incomingRequests,
+}: {
+  currentUser: AuthUser | null;
+  incomingRequests: number;
+}) {
   const router = useRouter();
+  const pathname = usePathname();
   const [loading, setLoading] = useState(false);
-  const [volume, setVolume] = usePreviewVolume();
-  const [showSlider, setShowSlider] = useState(false);
-  const sliderRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    function handleClick(e: MouseEvent) {
-      if (sliderRef.current && !sliderRef.current.contains(e.target as Node)) {
-        setShowSlider(false);
-      }
-    }
-    if (showSlider) document.addEventListener('mousedown', handleClick);
-    return () => document.removeEventListener('mousedown', handleClick);
-  }, [showSlider]);
 
   async function handleLogout() {
     setLoading(true);
@@ -53,69 +29,68 @@ export default function Header({ currentUser }: { currentUser: AuthUser | null }
     setLoading(false);
   }
 
-  const volumeIcon = volume === 0 ? 'volume_off' : volume < 0.4 ? 'volume_down' : 'volume_up';
+  function linkClass(href: string) {
+    const active = href === '/' ? pathname === '/' : pathname === href;
+    return `mono text-[0.78rem] leading-none py-1.5 px-2 rounded-[3px] transition-colors ${
+      active
+        ? 'bg-ink text-paper hover:bg-ink-soft hover:text-paper font-semibold'
+        : 'opacity-75 hover:opacity-100 hover:bg-mark-soft'
+    }`;
+  }
+
+  const buttonClass =
+    'mono text-[0.78rem] leading-none py-1.5 px-2 rounded-[3px] opacity-75 hover:opacity-100 hover:bg-mark-soft disabled:opacity-30 transition-colors';
+
+  const solidClass =
+    'mono text-[0.78rem] leading-none py-1.5 px-2 rounded-[3px] bg-ink text-paper hover:bg-ink-soft hover:text-paper font-semibold transition-colors';
 
   return (
-    <div className="flex items-center gap-3">
-      {/* Volume control */}
-      <div className="relative" ref={sliderRef}>
-        <button
-          onClick={() => setShowSlider((s) => !s)}
-          className="text-text-muted hover:text-text transition-colors p-1"
-          title="Volume"
-        >
-          <span className="material-symbols-outlined text-lg">{volumeIcon}</span>
-        </button>
-        {showSlider && (
-          <div className="absolute right-0 top-full mt-2 glass rounded-xl p-3 z-50 flex items-center gap-2 w-36">
-            <span className="material-symbols-outlined text-sm text-text-muted">
-              {volumeIcon}
-            </span>
-            <input
-              type="range"
-              min={0}
-              max={1}
-              step={0.05}
-              value={volume}
-              onChange={(e) => setVolume(parseFloat(e.target.value))}
-              className="flex-1 h-1 accent-pink cursor-pointer"
-            />
-          </div>
-        )}
-      </div>
+    <header className="rule-2 bg-paper sticky top-0 z-40 backdrop-blur-sm">
+      <div className="max-w-5xl mx-auto px-4 py-3 flex items-center gap-3 flex-wrap">
+        <Link href="/" className="shrink-0">
+          <span className="text-lg font-bold tracking-tight">setlist</span>
+        </Link>
 
-      {currentUser ? (
-        <>
-          <Link
-            href={`/${currentUser.username}`}
-            className="text-sm font-semibold text-text hover:text-pink transition-colors"
-          >
-            {currentUser.display_name || currentUser.username}
-          </Link>
-          <button
-            onClick={handleLogout}
-            disabled={loading}
-            className="text-xs text-text-muted hover:text-text transition-colors px-3 py-1.5 rounded-lg border border-border hover:border-pink/50 disabled:opacity-50"
-          >
-            {loading ? '…' : 'Logout'}
-          </button>
-        </>
-      ) : (
-        <>
-          <Link
-            href="/login"
-            className="text-xs text-text-muted hover:text-text transition-colors"
-          >
-            Log in
-          </Link>
-          <Link
-            href="/signup"
-            className="text-xs font-semibold bg-pink/10 text-pink hover:bg-pink/20 transition-colors px-3 py-1.5 rounded-lg"
-          >
-            Sign up
-          </Link>
-        </>
-      )}
-    </div>
+        <nav className="flex items-center gap-1.5 flex-wrap flex-1">
+          <Link href="/" className={linkClass('/')}>Feed</Link>
+          <Link href="/explore" className={linkClass('/explore')}>Entdecken</Link>
+
+          <div className="ml-auto flex items-center gap-1.5 flex-wrap">
+            {currentUser ? (
+              <>
+                <Link
+                  href={`/${currentUser.username}`}
+                  className={linkClass(`/${currentUser.username}`)}
+                >
+                  @{currentUser.username}
+                  {incomingRequests > 0 && (
+                    <span className="ml-1.5 mark mono-num text-[0.78rem] leading-none">
+                      {incomingRequests}
+                    </span>
+                  )}
+                </Link>
+                <button
+                  type="button"
+                  onClick={handleLogout}
+                  disabled={loading}
+                  className={buttonClass}
+                >
+                  {loading ? '…' : 'Ausloggen'}
+                </button>
+              </>
+            ) : (
+              <>
+                <Link href="/login" className={linkClass('/login')}>
+                  Einloggen
+                </Link>
+                <Link href="/signup" className={solidClass}>
+                  Registrieren
+                </Link>
+              </>
+            )}
+          </div>
+        </nav>
+      </div>
+    </header>
   );
 }

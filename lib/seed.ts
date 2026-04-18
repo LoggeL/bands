@@ -61,18 +61,10 @@ db.exec(`
     preview_url TEXT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
   );
-  CREATE TABLE reactions (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    diary_entry_id INTEGER NOT NULL REFERENCES diary_entries(id) ON DELETE CASCADE,
-    emoji TEXT NOT NULL,
-    reactor_name TEXT DEFAULT 'anonymous',
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-  );
   CREATE INDEX idx_diary_user ON diary_entries(user_id);
   CREATE INDEX idx_diary_date ON diary_entries(listened_at DESC);
   CREATE INDEX idx_live_user ON live_events(user_id);
   CREATE INDEX idx_wishlist_user ON wishlist(user_id);
-  CREATE INDEX idx_reactions_entry ON reactions(diary_entry_id);
 `);
 
 const bandsJson = JSON.parse(
@@ -155,9 +147,6 @@ const diaryNotes = [
 const insertDiary = db.prepare(
   `INSERT INTO diary_entries (user_id, artist_name, artist_img, track_title, genre, preview_url, note, mood, listened_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`
 );
-const insertReaction = db.prepare(
-  `INSERT INTO reactions (diary_entry_id, emoji, reactor_name) VALUES (?, ?, ?)`
-);
 
 const allBands = [...bandsJson.want, ...bandsJson.seen].filter(
   (b: { trackTitle?: string; preview?: string }) => b.trackTitle && b.preview
@@ -173,7 +162,7 @@ for (let i = 0; i < diaryBands.length; i++) {
   const mood = moods[Math.floor(Math.random() * moods.length)];
   const note = diaryNotes[Math.floor(Math.random() * diaryNotes.length)];
 
-  const { lastInsertRowid: entryId } = insertDiary.run(
+  insertDiary.run(
     userId,
     band.name,
     band.img || null,
@@ -184,15 +173,8 @@ for (let i = 0; i < diaryBands.length; i++) {
     mood,
     dateStr
   );
-
-  const reactionEmojis = ['🔥', '❤️', '🎸', '🤘', '💜', '🎵'];
-  const numReactions = Math.floor(Math.random() * 4);
-  for (let j = 0; j < numReactions; j++) {
-    const emoji = reactionEmojis[Math.floor(Math.random() * reactionEmojis.length)];
-    insertReaction.run(entryId, emoji, 'anonymous');
-  }
 }
-console.log(`Seeded ${diaryBands.length} diary entries with reactions`);
+console.log(`Seeded ${diaryBands.length} diary entries`);
 
 db.close();
 console.log('Database seeded successfully!');

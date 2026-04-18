@@ -76,28 +76,65 @@ function initSchema(db: Database.Database) {
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
 
-    CREATE TABLE IF NOT EXISTS reactions (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      diary_entry_id INTEGER NOT NULL REFERENCES diary_entries(id) ON DELETE CASCADE,
-      emoji TEXT NOT NULL,
-      reactor_name TEXT DEFAULT 'anonymous',
-      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    );
-
     CREATE INDEX IF NOT EXISTS idx_diary_user ON diary_entries(user_id);
     CREATE INDEX IF NOT EXISTS idx_diary_date ON diary_entries(listened_at DESC);
     CREATE INDEX IF NOT EXISTS idx_live_user ON live_events(user_id);
     CREATE INDEX IF NOT EXISTS idx_wishlist_user ON wishlist(user_id);
-    CREATE INDEX IF NOT EXISTS idx_reactions_entry ON reactions(diary_entry_id);
-    CREATE UNIQUE INDEX IF NOT EXISTS idx_reactions_unique ON reactions(diary_entry_id, reactor_name);
+
+    CREATE TABLE IF NOT EXISTS friendships (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      requester_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      addressee_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      status TEXT NOT NULL CHECK(status IN ('pending','accepted')),
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      accepted_at DATETIME
+    );
+    CREATE UNIQUE INDEX IF NOT EXISTS idx_friendships_pair ON friendships(requester_id, addressee_id);
+    CREATE INDEX IF NOT EXISTS idx_friendships_addressee ON friendships(addressee_id, status);
+    CREATE INDEX IF NOT EXISTS idx_friendships_requester ON friendships(requester_id, status);
+
+    CREATE TABLE IF NOT EXISTS password_reset_tokens (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+      token_hash TEXT UNIQUE NOT NULL,
+      expires_at DATETIME NOT NULL,
+      used_at DATETIME,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
+    CREATE INDEX IF NOT EXISTS idx_prt_user ON password_reset_tokens(user_id);
+    CREATE INDEX IF NOT EXISTS idx_prt_hash ON password_reset_tokens(token_hash);
   `);
 
-  // Add password_hash column if it doesn't exist (migration for existing DBs)
   const cols = db.prepare("PRAGMA table_info(users)").all() as { name: string }[];
   if (!cols.some((c) => c.name === 'password_hash')) {
     db.exec('ALTER TABLE users ADD COLUMN password_hash TEXT');
   }
+  if (!cols.some((c) => c.name === 'visibility')) {
+    db.exec("ALTER TABLE users ADD COLUMN visibility TEXT NOT NULL DEFAULT 'public' CHECK(visibility IN ('public','friends','private'))");
+  }
+  if (!cols.some((c) => c.name === 'email')) {
+    db.exec('ALTER TABLE users ADD COLUMN email TEXT');
+    db.exec('CREATE UNIQUE INDEX IF NOT EXISTS idx_users_email ON users(email) WHERE email IS NOT NULL');
+  }
+  if (!cols.some((c) => c.name === 'notify_email')) {
+    db.exec('ALTER TABLE users ADD COLUMN notify_email INTEGER NOT NULL DEFAULT 1');
+  }
+
+  const diaryCols = db.prepare("PRAGMA table_info(diary_entries)").all() as { name: string }[];
+  if (!diaryCols.some((c) => c.name === 'album_cover_url')) {
+    db.exec('ALTER TABLE diary_entries ADD COLUMN album_cover_url TEXT');
+  }
+  const liveCols = db.prepare("PRAGMA table_info(live_events)").all() as { name: string }[];
+  if (!liveCols.some((c) => c.name === 'album_cover_url')) {
+    db.exec('ALTER TABLE live_events ADD COLUMN album_cover_url TEXT');
+  }
+  const wishCols = db.prepare("PRAGMA table_info(wishlist)").all() as { name: string }[];
+  if (!wishCols.some((c) => c.name === 'album_cover_url')) {
+    db.exec('ALTER TABLE wishlist ADD COLUMN album_cover_url TEXT');
+  }
 }
+
+export type Visibility = 'public' | 'friends' | 'private';
 
 export type User = {
   id: number;
@@ -106,7 +143,21 @@ export type User = {
   bio: string | null;
   avatar_url: string | null;
   password_hash: string | null;
+  visibility: Visibility;
+  email: string | null;
+  notify_email: number;
   created_at: string;
+};
+
+export type FriendshipStatus = 'pending' | 'accepted';
+
+export type Friendship = {
+  id: number;
+  requester_id: number;
+  addressee_id: number;
+  status: FriendshipStatus;
+  created_at: string;
+  accepted_at: string | null;
 };
 
 export type Session = {
@@ -122,6 +173,7 @@ export type DiaryEntry = {
   user_id: number;
   artist_name: string;
   artist_img: string | null;
+  album_cover_url: string | null;
   track_title: string;
   genre: string | null;
   preview_url: string | null;
@@ -136,6 +188,7 @@ export type LiveEvent = {
   user_id: number;
   artist_name: string;
   artist_img: string | null;
+  album_cover_url: string | null;
   genre: string | null;
   venue: string | null;
   event_date: string | null;
@@ -150,16 +203,10 @@ export type WishlistItem = {
   user_id: number;
   artist_name: string;
   artist_img: string | null;
+  album_cover_url: string | null;
   genre: string | null;
   track_title: string | null;
   preview_url: string | null;
   created_at: string;
 };
 
-export type Reaction = {
-  id: number;
-  diary_entry_id: number;
-  emoji: string;
-  reactor_name: string;
-  created_at: string;
-};
