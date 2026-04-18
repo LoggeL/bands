@@ -41,7 +41,7 @@ export default function LiveCard({
     >
       {showAuthor && (
         <Link
-          href={`/${authorUsername}`}
+          href={`/@${authorUsername}`}
           className="inline-flex items-center gap-1.5 text-[0.72rem] mono pb-1.5 mb-2 rule font-semibold"
         >
           <AuthorAvatar
@@ -64,7 +64,7 @@ export default function LiveCard({
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2">
             <Link
-              href={`/${authorUsername}/live/${event.id}`}
+              href={`/@${authorUsername}/live/${event.id}`}
               className="min-w-0 group/link"
             >
               <h3 className="font-semibold text-[0.95rem] truncate leading-tight group-hover/link:underline decoration-1 underline-offset-4">

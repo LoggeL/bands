@@ -17,7 +17,7 @@ export default async function SettingsPage() {
       <div className="mono text-[0.68rem] uppercase tracking-[0.22em] opacity-70 flex items-center justify-between gap-3 mb-2">
         <span>Einstellungen</span>
         <Link
-          href={`/${me.username}`}
+          href={`/@${me.username}`}
           className="underline decoration-1 underline-offset-[3px] opacity-70 hover:opacity-100"
         >
           ← zurück zum Profil

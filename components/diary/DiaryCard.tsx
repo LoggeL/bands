@@ -76,7 +76,7 @@ export default function DiaryCard({
     >
       {showAuthor && (
         <Link
-          href={`/${authorUsername}`}
+          href={`/@${authorUsername}`}
           className="inline-flex items-center gap-1.5 text-[0.68rem] mono pb-1 mb-1.5 rule font-semibold"
         >
           <AuthorAvatar
@@ -98,7 +98,7 @@ export default function DiaryCard({
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-2">
             <Link
-              href={`/${authorUsername}/diary/${entry.id}`}
+              href={`/@${authorUsername}/diary/${entry.id}`}
               className="min-w-0 group/link"
             >
               <h3 className="font-semibold text-[0.88rem] truncate leading-tight group-hover/link:underline decoration-1 underline-offset-4">

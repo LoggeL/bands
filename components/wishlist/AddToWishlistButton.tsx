@@ -41,9 +41,19 @@ export default function AddToWishlistButton({
       type="button"
       onClick={add}
       disabled={status === 'saving'}
-      className="text-[0.7rem] underline hover:bg-mark px-0.5"
+      className="text-[0.7rem] underline hover:bg-mark px-0.5 inline-flex items-center gap-1"
     >
-      {status === 'saving' ? 'FÜGE HINZU…' : '+ WUNSCHLISTE'}
+      {status === 'saving' ? (
+        <>
+          <span
+            aria-hidden
+            className="inline-block w-[8px] h-[8px] border border-current border-r-transparent rounded-full animate-spin"
+          />
+          <span>FÜGE HINZU…</span>
+        </>
+      ) : (
+        '+ WUNSCHLISTE'
+      )}
     </button>
   );
 }

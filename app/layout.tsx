@@ -5,7 +5,6 @@ import { cookies } from 'next/headers';
 import { getUserByToken } from '@/lib/auth';
 import { friendCounts } from '@/lib/queries';
 import Header from '@/components/Header';
-import FloatingVolume from '@/components/shared/FloatingVolume';
 
 const mono = JetBrains_Mono({
   subsets: ['latin'],
@@ -53,7 +52,6 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className="min-h-screen">
         <Header currentUser={authUser} incomingRequests={incoming} />
         {children}
-        <FloatingVolume />
       </body>
     </html>
   );

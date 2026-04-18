@@ -22,7 +22,7 @@ export default function LoginPage() {
     });
     if (res.ok) {
       const data = await res.json();
-      router.push(`/${data.username}`);
+      router.push(`/@${data.username}`);
       router.refresh();
     } else {
       const data = await res.json();

@@ -30,7 +30,7 @@ export default function SharedWishlistCallout({
       </div>
       <p className="text-sm opacity-85 mb-4 leading-relaxed max-w-lg">
         Du und{' '}
-        <Link href={`/${otherUsername}`} className="font-semibold underline decoration-1 underline-offset-2 hover:bg-mark px-0.5">
+        <Link href={`/@${otherUsername}`} className="font-semibold underline decoration-1 underline-offset-2 hover:bg-mark px-0.5">
           @{otherUsername}
         </Link>{' '}
         wollt beide {shared.length} {shared.length === 1 ? 'Künstler' : 'Künstler'} live sehen. Plane ein Konzert mit {other}.

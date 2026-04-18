@@ -21,10 +21,10 @@ export default function ProfileHeader({
   isOwner?: boolean;
 }) {
   const tabs: { key: typeof active; label: string; href: string }[] = [
-    { key: 'overview', label: 'ÜBERSICHT', href: `/${user.username}` },
-    { key: 'diary', label: `TAGEBUCH · ${counts.diary}`, href: `/${user.username}/diary` },
-    { key: 'bands', label: `BANDS · ${counts.artists}`, href: `/${user.username}/wishlist` },
-    { key: 'friends', label: `FREUNDE · ${friendCount}`, href: `/${user.username}/friends` },
+    { key: 'overview', label: 'ÜBERSICHT', href: `/@${user.username}` },
+    { key: 'diary', label: `TAGEBUCH · ${counts.diary}`, href: `/@${user.username}/diary` },
+    { key: 'bands', label: `BANDS · ${counts.artists}`, href: `/@${user.username}/wishlist` },
+    { key: 'friends', label: `FREUNDE · ${friendCount}`, href: `/@${user.username}/friends` },
   ];
 
   const visLabel =

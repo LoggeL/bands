@@ -108,7 +108,7 @@ export default function ArtistCard({
               {artist.live_events.slice(0, 3).map((le) => (
                 <li key={le.id} className="truncate">
                   <Link
-                    href={`/${ownerUsername}/live/${le.id}`}
+                    href={`/@${ownerUsername}/live/${le.id}`}
                     className="hover:underline decoration-1 underline-offset-2"
                   >
                     {le.event_date && (

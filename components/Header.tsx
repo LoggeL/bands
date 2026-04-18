@@ -59,8 +59,8 @@ export default function Header({
             {currentUser ? (
               <>
                 <Link
-                  href={`/${currentUser.username}`}
-                  className={linkClass(`/${currentUser.username}`)}
+                  href={`/@${currentUser.username}`}
+                  className={linkClass(`/@${currentUser.username}`)}
                 >
                   @{currentUser.username}
                   {incomingRequests > 0 && (

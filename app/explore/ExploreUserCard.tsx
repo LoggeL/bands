@@ -29,7 +29,7 @@ export default function ExploreUserCard({
 
   return (
     <Link
-      href={`/${user.username}`}
+      href={`/@${user.username}`}
       className="block p-4 hover:bg-mark-soft"
       style={
         tint

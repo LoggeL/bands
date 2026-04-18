@@ -139,7 +139,17 @@ export default function AddLiveForm() {
 
       <div className="flex gap-2 justify-end rule-t pt-2">
         <button type="submit" disabled={saving} className="btn btn-solid">
-          {saving ? 'SPEICHERE…' : 'SPEICHERN'}
+          {saving ? (
+            <>
+              <span
+                aria-hidden
+                className="inline-block w-[10px] h-[10px] border border-current border-r-transparent rounded-full animate-spin"
+              />
+              <span>SPEICHERE…</span>
+            </>
+          ) : (
+            'SPEICHERN'
+          )}
         </button>
       </div>
     </form>

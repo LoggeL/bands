@@ -56,7 +56,7 @@ export default async function DiaryEntryPage({
   return (
     <div className="max-w-2xl mx-auto px-4 pb-16">
       <div className="rule-t-2 py-3 mb-6 mt-2">
-        <Link href={`/${data.owner.username}/diary`} className="text-xs underline">
+        <Link href={`/@${data.owner.username}/diary`} className="text-xs underline">
           ← @{data.owner.username} TAGEBUCH
         </Link>
       </div>

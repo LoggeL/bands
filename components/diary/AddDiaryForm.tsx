@@ -183,7 +183,17 @@ export default function AddDiaryForm() {
 
       <div className="flex gap-2 justify-end rule-t pt-3">
         <button type="submit" disabled={saving} className="btn btn-solid">
-          {saving ? 'Speichern…' : 'Eintrag speichern'}
+          {saving ? (
+            <>
+              <span
+                aria-hidden
+                className="inline-block w-[10px] h-[10px] border border-current border-r-transparent rounded-full animate-spin"
+              />
+              <span>Speichere…</span>
+            </>
+          ) : (
+            'Eintrag speichern'
+          )}
         </button>
       </div>
     </form>

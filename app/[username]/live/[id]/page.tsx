@@ -56,7 +56,7 @@ export default async function LiveEventPage({
   return (
     <div className="max-w-2xl mx-auto px-4 pb-16">
       <div className="rule-t-2 py-3 mb-6 mt-2">
-        <Link href={`/${data.owner.username}/live`} className="text-xs underline">
+        <Link href={`/@${data.owner.username}/live`} className="text-xs underline">
           ← @{data.owner.username} LIVE
         </Link>
       </div>

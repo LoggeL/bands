@@ -46,7 +46,7 @@ function BuddyRow({ buddy }: { buddy: WishlistBuddy }) {
             {buddy.others.map((o) => (
               <li key={o.id}>
                 <Link
-                  href={`/${o.username}`}
+                  href={`/@${o.username}`}
                   className="mono text-[0.78rem] px-2 py-0.5 rounded-full border border-rule-strong hover:bg-mark-soft inline-block"
                 >
                   @{o.username}

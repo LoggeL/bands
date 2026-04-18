@@ -6,5 +6,5 @@ export default async function LiveRedirect({
   params: Promise<{ username: string }>;
 }) {
   const { username } = await params;
-  redirect(`/${username}/wishlist`);
+  redirect(`/@${username}/wishlist`);
 }

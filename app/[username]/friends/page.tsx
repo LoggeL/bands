@@ -44,7 +44,7 @@ export default async function FriendsPage({
           <ul className="space-y-2">
             {incoming.map((u) => (
               <li key={u.id} className="block p-3 flex items-center justify-between gap-3">
-                <Link href={`/${u.username}`} className="flex items-center gap-3 min-w-0 hover:bg-mark">
+                <Link href={`/@${u.username}`} className="flex items-center gap-3 min-w-0 hover:bg-mark">
                   <div className="w-10 h-10 border-2 border-ink flex items-center justify-center font-black">
                     {initials(u.display_name || u.username)}
                   </div>
@@ -71,7 +71,7 @@ export default async function FriendsPage({
           <ul className="space-y-2">
             {outgoing.map((u) => (
               <li key={u.id} className="block p-3 flex items-center justify-between gap-3">
-                <Link href={`/${u.username}`} className="flex items-center gap-3 min-w-0 hover:bg-mark">
+                <Link href={`/@${u.username}`} className="flex items-center gap-3 min-w-0 hover:bg-mark">
                   <div className="w-10 h-10 border-2 border-ink flex items-center justify-center font-black">
                     {initials(u.display_name || u.username)}
                   </div>
@@ -102,7 +102,7 @@ export default async function FriendsPage({
           <ul className="space-y-2">
             {friends.map((u) => (
               <li key={u.id} className="block p-3 flex items-center justify-between gap-3">
-                <Link href={`/${u.username}`} className="flex items-center gap-3 min-w-0 hover:bg-mark">
+                <Link href={`/@${u.username}`} className="flex items-center gap-3 min-w-0 hover:bg-mark">
                   <div className="w-10 h-10 border-2 border-ink flex items-center justify-center font-black">
                     {initials(u.display_name || u.username)}
                   </div>
