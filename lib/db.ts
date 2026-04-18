@@ -123,6 +123,36 @@ function initSchema(db: Database.Database) {
       blurhash TEXT,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
+
+    -- Upcoming concerts pulled lazily from Bandsintown (or similar). Keyed
+    -- on LOWER(artist_name); each row is one announced show.
+    CREATE TABLE IF NOT EXISTS upcoming_events (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      artist_name_key TEXT NOT NULL,
+      external_id TEXT,
+      event_date TEXT NOT NULL,
+      venue TEXT,
+      city TEXT,
+      region TEXT,
+      country TEXT,
+      ticket_url TEXT,
+      event_url TEXT,
+      source TEXT NOT NULL DEFAULT 'bandsintown',
+      fetched_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
+    CREATE INDEX IF NOT EXISTS idx_upcoming_artist ON upcoming_events(artist_name_key);
+    CREATE INDEX IF NOT EXISTS idx_upcoming_date ON upcoming_events(event_date);
+
+    -- Tracks the last fetch attempt per artist so we can honour a TTL and
+    -- also cache the "no upcoming shows" answer (otherwise we'd hammer the
+    -- upstream for inactive bands on every page load).
+    CREATE TABLE IF NOT EXISTS upcoming_fetch_meta (
+      artist_name_key TEXT PRIMARY KEY,
+      fetched_at DATETIME NOT NULL,
+      source TEXT NOT NULL DEFAULT 'bandsintown',
+      event_count INTEGER NOT NULL DEFAULT 0,
+      error TEXT
+    );
   `);
 
   const cols = db.prepare("PRAGMA table_info(users)").all() as { name: string }[];

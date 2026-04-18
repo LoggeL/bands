@@ -1,5 +1,10 @@
 import { getDb } from './db';
 import type { User, DiaryEntry, Visibility } from './db';
+import {
+  getCachedUpcomingBatch,
+  scheduleRefreshIfStale,
+  type UpcomingEvent,
+} from './upcoming';
 
 export type FriendState =
   | 'anonymous'
@@ -231,6 +236,8 @@ export type ArtistSummary = {
   /** Pre-computed backdrop tint from image_meta — replaces client-side color extraction. */
   dominant_color: string | null;
   blurhash: string | null;
+  /** Upcoming concerts for this artist pulled lazily from Bandsintown. */
+  upcoming_events: UpcomingEvent[];
 };
 
 /**
@@ -295,6 +302,7 @@ export function getArtistSummary(userId: number): ArtistSummary[] {
       added_at: w.created_at,
       dominant_color: null,
       blurhash: null,
+      upcoming_events: [],
     });
   }
 
@@ -336,6 +344,7 @@ export function getArtistSummary(userId: number): ArtistSummary[] {
         added_at: l.created_at,
         dominant_color: null,
         blurhash: null,
+        upcoming_events: [],
       });
     }
   }
@@ -355,6 +364,16 @@ export function getArtistSummary(userId: number): ArtistSummary[] {
       a.dominant_color = meta.dominant_color;
       a.blurhash = meta.blurhash;
     }
+  }
+
+  // Attach cached upcoming concerts and trigger a background refresh for any
+  // stale/missing artists. Never blocks the response — the next render gets
+  // the fresh data.
+  const names = Array.from(byKey.values()).map((a) => a.artist_name);
+  const upcoming = getCachedUpcomingBatch(names);
+  for (const a of byKey.values()) {
+    a.upcoming_events = upcoming.get(a.artist_name.toLowerCase()) || [];
+    scheduleRefreshIfStale(a.artist_name);
   }
 
   // Sort: seen (by most recent date desc) first, then wishlist-only (alphabetical).

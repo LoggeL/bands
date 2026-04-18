@@ -102,7 +102,51 @@ export default function ArtistCard({
               </span>
             )}
             {artist.genre && <span className="chip">{artist.genre}</span>}
+            {artist.upcoming_events.length > 0 && (
+              <span
+                className="chip chip-ember"
+                title={`${artist.upcoming_events.length} angekündigte Konzert${artist.upcoming_events.length === 1 ? '' : 'e'}`}
+              >
+                LIVE · {artist.upcoming_events.length}
+              </span>
+            )}
           </div>
+
+          {artist.upcoming_events.length > 0 && (
+            <ul className="mt-1.5 space-y-0.5 text-[0.72rem] leading-snug">
+              {artist.upcoming_events.slice(0, 2).map((e, i) => {
+                const loc = [e.city, e.country].filter(Boolean).join(', ');
+                const label = (
+                  <>
+                    <span className="mono-num mr-1">{e.event_date}</span>
+                    {e.venue && <span className="opacity-80">· {e.venue}</span>}
+                    {loc && <span className="opacity-60"> · {loc}</span>}
+                  </>
+                );
+                return (
+                  <li key={`${e.event_date}-${i}`} className="truncate">
+                    {e.ticket_url || e.event_url ? (
+                      <a
+                        href={e.ticket_url || e.event_url || '#'}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:underline decoration-1 underline-offset-2"
+                      >
+                        {label}
+                      </a>
+                    ) : (
+                      <span className="opacity-85">{label}</span>
+                    )}
+                  </li>
+                );
+              })}
+              {artist.upcoming_events.length > 2 && (
+                <li className="mono text-[0.68rem] opacity-60">
+                  + {artist.upcoming_events.length - 2} weitere
+                </li>
+              )}
+            </ul>
+          )}
 
           {isOwner ? (
             <BandStatusToggles artist={artist} />
