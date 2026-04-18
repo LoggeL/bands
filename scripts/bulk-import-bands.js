@@ -4,8 +4,16 @@ const Database = require('better-sqlite3');
 const path = require('path');
 const fs = require('fs');
 
-const DB_PATH = path.join(process.cwd(), 'data.db');
+function resolveDbPath() {
+  if (process.env.DB_PATH) return process.env.DB_PATH;
+  const dir = process.env.DATA_DIR || process.cwd();
+  return path.join(dir, 'data.db');
+}
+const DB_PATH = resolveDbPath();
 const USERNAME = process.argv[2] || 'logge';
+
+console.log('[import] DB =', DB_PATH);
+console.log('[import] user =', USERNAME);
 
 const db = new Database(DB_PATH);
 db.pragma('journal_mode = WAL');
