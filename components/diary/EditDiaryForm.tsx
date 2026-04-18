@@ -116,12 +116,12 @@ export default function EditDiaryForm({
               className="w-9 h-9 object-cover shrink-0"
             />
           )}
-          <span className="min-w-0 flex-1">
-            <span className="text-[0.85rem] font-semibold truncate block leading-tight">
+          <div className="min-w-0 flex-1">
+            <div className="text-[0.85rem] font-semibold truncate leading-tight">
               {song.track_title}
-            </span>
-            <span className="text-[0.72rem] opacity-70 truncate block">{song.artist_name}</span>
-          </span>
+            </div>
+            <div className="text-[0.72rem] opacity-70 truncate">{song.artist_name}</div>
+          </div>
           <button
             type="button"
             onClick={() => setSearching(true)}

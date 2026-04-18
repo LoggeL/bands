@@ -106,10 +106,10 @@ export default function AddDiaryForm() {
               className="w-10 h-10 object-cover rounded-[3px]"
             />
           )}
-          <span className="min-w-0 flex-1">
-            <span className="text-sm font-semibold truncate block">{form.track_title}</span>
-            <span className="text-[0.72rem] opacity-70 truncate block">{form.artist_name}</span>
-          </span>
+          <div className="min-w-0 flex-1">
+            <div className="text-sm font-semibold truncate">{form.track_title}</div>
+            <div className="text-[0.72rem] opacity-70 truncate">{form.artist_name}</div>
+          </div>
           <button
             type="button"
             onClick={reset}

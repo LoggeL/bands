@@ -13,6 +13,12 @@ export function proxiedAudioUrl(src: string | null | undefined): string | null {
   if (src.startsWith('/') || src.startsWith('data:') || src.startsWith('blob:')) {
     return src;
   }
+  // Legacy rows stored relative paths like `previews/xyz.mp3`. Without the
+  // leading slash the browser resolves them against the current page path,
+  // which breaks under @username routes. Fix by making them root-relative.
+  if (src.startsWith('previews/') || src.startsWith('avatars/')) {
+    return '/' + src;
+  }
   try {
     const u = new URL(src);
     if (u.protocol !== 'https:' && u.protocol !== 'http:') return src;

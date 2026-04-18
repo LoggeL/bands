@@ -113,6 +113,16 @@ function initSchema(db: Database.Database) {
     );
     CREATE INDEX IF NOT EXISTS idx_prt_user ON password_reset_tokens(user_id);
     CREATE INDEX IF NOT EXISTS idx_prt_hash ON password_reset_tokens(token_hash);
+
+    -- Cached dominant colour + blurhash per image URL. Computed once when an
+    -- image is first seen and reused everywhere (diary, live, wishlist,
+    -- avatars) so the frontend doesn't have to re-derive it.
+    CREATE TABLE IF NOT EXISTS image_meta (
+      url TEXT PRIMARY KEY,
+      dominant_color TEXT,
+      blurhash TEXT,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
   `);
 
   const cols = db.prepare("PRAGMA table_info(users)").all() as { name: string }[];
@@ -145,6 +155,13 @@ function initSchema(db: Database.Database) {
 }
 
 export type Visibility = 'public' | 'friends' | 'private';
+
+export type ImageMeta = {
+  url: string;
+  dominant_color: string | null;
+  blurhash: string | null;
+  created_at: string;
+};
 
 export type User = {
   id: number;
