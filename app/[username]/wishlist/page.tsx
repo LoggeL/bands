@@ -6,7 +6,7 @@ import BandsGrid from '@/components/shared/BandsGrid';
 import CompareWishlist from '@/components/wishlist/CompareWishlist';
 import ConcertBuddies from '@/components/wishlist/ConcertBuddies';
 import SharedWishlistCallout from '@/components/wishlist/SharedWishlistCallout';
-import AddLiveForm from '@/components/live/AddLiveForm';
+import AddBandForm from '@/components/wishlist/AddBandForm';
 
 export default async function BandsPage({
   params,
@@ -56,7 +56,7 @@ export default async function BandsPage({
 
           {buddies.length > 0 && <ConcertBuddies buddies={buddies} />}
 
-          {ctx.isOwner && <AddLiveForm />}
+          {ctx.isOwner && <AddBandForm />}
 
           <div className="rule-t-2 pt-4 flex items-center justify-between flex-wrap gap-2">
             <div className="flex items-baseline gap-3 flex-wrap">
