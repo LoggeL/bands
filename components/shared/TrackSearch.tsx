@@ -44,12 +44,12 @@ export default function TrackSearch({
         placeholder="TRACK SUCHEN"
       />
       {open && results.length > 0 && (
-        <div className="absolute z-50 top-full left-0 right-0 mt-[2px] block max-h-64 overflow-y-auto">
+        <div className="absolute z-50 top-full left-0 right-0 mt-[2px] max-h-64 overflow-y-auto bg-paper border border-rule-strong rounded-md shadow-sm divide-y divide-rule">
           {results.map((t) => (
             <button
               key={t.id}
               type="button"
-              className="w-full flex items-center gap-2 px-2 py-1.5 text-left rule hover:bg-mark"
+              className="w-full flex items-center gap-2 px-2 py-1.5 text-left hover:bg-mark-soft"
               onClick={() => {
                 onSelect(t);
                 setQuery(t.title);
@@ -60,13 +60,13 @@ export default function TrackSearch({
                 <img
                   src={t.album.cover_medium}
                   alt=""
-                  className="w-8 h-8 object-cover border-2 border-ink shrink-0"
+                  className="w-8 h-8 object-cover rounded-[3px] shrink-0"
                 />
               )}
-              <span className="flex-1 min-w-0">
-                <span className="text-sm truncate block">{t.title}</span>
-                <span className="text-[0.7rem] opacity-60 truncate block">{t.album.title}</span>
-              </span>
+              <div className="flex-1 min-w-0">
+                <div className="text-sm truncate">{t.title}</div>
+                <div className="text-[0.7rem] opacity-60 truncate">{t.album.title}</div>
+              </div>
             </button>
           ))}
         </div>

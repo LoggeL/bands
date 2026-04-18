@@ -126,7 +126,7 @@ export default function SongSearch({
         placeholder={placeholder}
       />
       {open && (results.length > 0 || loading) && (
-        <div className="absolute z-50 top-full left-0 right-0 mt-[2px] block max-h-72 overflow-y-auto bg-paper border border-rule-strong">
+        <div className="absolute z-50 top-full left-0 right-0 mt-[2px] max-h-72 overflow-y-auto bg-paper border border-rule-strong rounded-md shadow-sm divide-y divide-rule">
           {loading && results.length === 0 && (
             <div className="px-2 py-2 text-[0.72rem] mono opacity-60">suche…</div>
           )}
@@ -136,7 +136,7 @@ export default function SongSearch({
             return (
               <div
                 key={t.id}
-                className="flex items-stretch rule hover:bg-mark-soft"
+                className="flex items-stretch hover:bg-mark-soft"
               >
                 <button
                   type="button"
@@ -159,18 +159,18 @@ export default function SongSearch({
                     <img
                       src={t.album.cover_medium}
                       alt=""
-                      className="w-9 h-9 object-cover border-2 border-ink shrink-0"
+                      className="w-9 h-9 object-cover rounded-[3px] shrink-0"
                     />
                   )}
-                  <span className="flex-1 min-w-0">
-                    <span className="text-sm truncate block font-medium">{t.title}</span>
-                    <span className="text-[0.7rem] opacity-70 truncate block">
+                  <div className="flex-1 min-w-0">
+                    <div className="text-sm truncate font-medium">{t.title}</div>
+                    <div className="text-[0.7rem] opacity-70 truncate">
                       {t.artist.name}
                       {t.album.title && t.album.title !== t.title && (
                         <span className="opacity-60"> · {t.album.title}</span>
                       )}
-                    </span>
-                  </span>
+                    </div>
+                  </div>
                 </button>
                 {t.preview && (
                   <button

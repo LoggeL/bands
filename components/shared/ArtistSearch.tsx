@@ -37,19 +37,23 @@ export default function ArtistSearch({ onSelect }: { onSelect: (artist: DeezerAr
         placeholder="KÜNSTLER SUCHEN"
       />
       {open && results.length > 0 && (
-        <div className="absolute z-50 top-full left-0 right-0 mt-[2px] block max-h-64 overflow-y-auto">
+        <div className="absolute z-50 top-full left-0 right-0 mt-[2px] max-h-64 overflow-y-auto bg-paper border border-rule-strong rounded-md shadow-sm divide-y divide-rule">
           {results.map((a) => (
             <button
               key={a.id}
               type="button"
-              className="w-full flex items-center gap-3 px-2 py-1.5 text-left rule hover:bg-mark"
+              className="w-full flex items-center gap-3 px-2 py-1.5 text-left hover:bg-mark-soft"
               onClick={() => {
                 onSelect(a);
                 setQuery(a.name);
                 setOpen(false);
               }}
             >
-              <img src={a.picture_medium} alt={a.name} className="w-8 h-8 object-cover border-2 border-ink" />
+              <img
+                src={a.picture_medium}
+                alt=""
+                className="w-8 h-8 object-cover rounded-[3px] shrink-0"
+              />
               <span className="text-sm truncate">{a.name}</span>
             </button>
           ))}
