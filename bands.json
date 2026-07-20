@@ -25,21 +25,6 @@
       "track": "Zwanzig"
     },
     {
-      "name": "Bad Omens",
-      "genre": "Metalcore",
-      "img": "https://cdn-images.dzcdn.net/images/artist/8a185a7bd12ca20bb8d9e01ea699467d/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Nowhere To Go",
-      "preview": "previews/Bad-Omens.mp3?v=1774337004"
-    },
-    {
-      "name": "Billy Talent",
-      "genre": "Punk Rock",
-      "deezer": "2kCDVxSRso0RSVIL5K99JR",
-      "img": "https://cdn-images.dzcdn.net/images/artist/85a34aefba04a1223ff1d6b0fe08fc63/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Red Flag",
-      "preview": "previews/Billy-Talent.mp3?v=1774311427"
-    },
-    {
       "name": "Broilers",
       "genre": "Punk Rock",
       "deezer": "3csTaq1Nn36M2N0Y0iAB9g",
@@ -109,13 +94,6 @@
       "preview": "previews/Freude.mp3?v=1774311427"
     },
     {
-      "name": "grandson",
-      "genre": "Alt Rock",
-      "img": "https://cdn-images.dzcdn.net/images/artist/46be123131f61e8e359c8b05248290b5/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Blood // Water",
-      "preview": "previews/grandson.mp3?v=1774336960"
-    },
-    {
       "name": "Haller",
       "genre": "Indie",
       "deezer": "7l0gDf5VIpOPpDMdYt8vNz",
@@ -178,14 +156,6 @@
       "preview": "previews/Liedfett.mp3?v=1774311427"
     },
     {
-      "name": "Linkin Park",
-      "genre": "Nu Metal/Rock",
-      "deezer": "6XyY86QOPPez6joegGAjR5",
-      "img": "https://cdn-images.dzcdn.net/images/artist/4886905210739af3438990897bad3a98/250x250-000000-80-0-0.jpg",
-      "trackTitle": "In the End",
-      "preview": "previews/Linkin-Park.mp3?v=1774311427"
-    },
-    {
       "name": "Lumpenpack",
       "genre": "Comedy/Musik",
       "deezer": "2K6bdgBDhulVNz0JWYRwFO",
@@ -202,13 +172,6 @@
       "preview": "previews/Marlo-Grosshardt.mp3?v=1774568683"
     },
     {
-      "name": "Marteria",
-      "genre": "Hip-Hop",
-      "img": "https://cdn-images.dzcdn.net/images/artist/6eadc937651239a34b74eeb080be8717/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Lila Wolken",
-      "preview": "previews/Marteria.mp3?v=1774568683"
-    },
-    {
       "name": "Moonkid",
       "genre": "Indie",
       "img": "https://cdn-images.dzcdn.net/images/artist/4284d7479fea6b1a05a30ab30e6aca20/250x250-000000-80-0-0.jpg",
@@ -222,13 +185,6 @@
       "img": "https://cdn-images.dzcdn.net/images/artist/f30bf029459eedbcb4dd7cbc2a35a968/250x250-000000-80-0-0.jpg",
       "trackTitle": "Rave On",
       "preview": "previews/OK-KID.mp3?v=1774311427"
-    },
-    {
-      "name": "PA69",
-      "genre": "Punk",
-      "img": "https://cdn-images.dzcdn.net/images/artist/5ffaf19a24872f7abb9b9e8c9510fcb1/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Komplett Blau",
-      "preview": "previews/PA69.mp3?v=1774568683"
     },
     {
       "name": "Paula Carolina",
@@ -605,14 +561,16 @@
       "genre": "Hip-Hop/Rock",
       "img": "https://cdn-images.dzcdn.net/images/artist/5c52e9795414734e1471d00efd48d430/250x250-000000-80-0-0.jpg",
       "trackTitle": "Willst du",
-      "preview": "previews/Alligatoah.mp3?v=1774568683"
+      "preview": "previews/Alligatoah.mp3?v=1774568683",
+      "note": "Wuhlheide"
     },
     {
       "name": "Drunken Masters",
       "genre": "Hip-Hop",
       "img": "https://cdn-images.dzcdn.net/images/artist/3ac816deb64f6877c77abb3cac982bc3/250x250-000000-80-0-0.jpg",
       "trackTitle": "Bauchnabelpiercing",
-      "preview": "previews/Drunken-Masters.mp3?v=1774568683"
+      "preview": "previews/Drunken-Masters.mp3?v=1774568683",
+      "note": "Heidelberg"
     },
     {
       "name": "Mehnersmoos",
@@ -620,6 +578,56 @@
       "img": "https://cdn-images.dzcdn.net/images/artist/b24f81d0a08808f49dff0c0877919eb6/250x250-000000-80-0-0.jpg",
       "trackTitle": "Nachteule",
       "preview": "previews/Mehnersmoos.mp3?v=1774568683"
+    },
+    {
+      "name": "Bad Omens",
+      "genre": "Metalcore",
+      "img": "https://cdn-images.dzcdn.net/images/artist/8a185a7bd12ca20bb8d9e01ea699467d/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Nowhere To Go",
+      "preview": "previews/Bad-Omens.mp3?v=1774337004",
+      "note": "Rock am Ring"
+    },
+    {
+      "name": "Billy Talent",
+      "genre": "Punk Rock",
+      "deezer": "2kCDVxSRso0RSVIL5K99JR",
+      "img": "https://cdn-images.dzcdn.net/images/artist/85a34aefba04a1223ff1d6b0fe08fc63/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Red Flag",
+      "preview": "previews/Billy-Talent.mp3?v=1774311427",
+      "note": "Rock am Ring"
+    },
+    {
+      "name": "Linkin Park",
+      "genre": "Nu Metal/Rock",
+      "deezer": "6XyY86QOPPez6joegGAjR5",
+      "img": "https://cdn-images.dzcdn.net/images/artist/4886905210739af3438990897bad3a98/250x250-000000-80-0-0.jpg",
+      "trackTitle": "In the End",
+      "preview": "previews/Linkin-Park.mp3?v=1774311427",
+      "note": "Rock am Ring"
+    },
+    {
+      "name": "grandson",
+      "genre": "Alt Rock",
+      "img": "https://cdn-images.dzcdn.net/images/artist/46be123131f61e8e359c8b05248290b5/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Blood // Water",
+      "preview": "previews/grandson.mp3?v=1774336960",
+      "note": "Southside"
+    },
+    {
+      "name": "Marteria",
+      "genre": "Hip-Hop",
+      "img": "https://cdn-images.dzcdn.net/images/artist/6eadc937651239a34b74eeb080be8717/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Lila Wolken",
+      "preview": "previews/Marteria.mp3?v=1774568683",
+      "note": "Rock am Ring"
+    },
+    {
+      "name": "PA69",
+      "genre": "Punk",
+      "img": "https://cdn-images.dzcdn.net/images/artist/5ffaf19a24872f7abb9b9e8c9510fcb1/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Komplett Blau",
+      "preview": "previews/PA69.mp3?v=1774568683",
+      "note": "Stagetopia"
     }
   ]
 }
