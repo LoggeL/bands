@@ -29,7 +29,7 @@ const serif = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: 'SETLIST',
+  title: 'BANDS',
   description: 'Das Tagebuch für Musikfans. Trag ein, was du hörst, welche Konzerte du besuchst und welche Künstler du live sehen willst.',
   icons: {
     icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%231c140d'/><circle cx='50' cy='50' r='42' fill='none' stroke='%232a1f15' stroke-width='0.6'/><circle cx='50' cy='50' r='34' fill='none' stroke='%232a1f15' stroke-width='0.6'/><circle cx='50' cy='50' r='26' fill='none' stroke='%232a1f15' stroke-width='0.6'/><circle cx='50' cy='50' r='18' fill='%23b64319'/><circle cx='50' cy='50' r='3.5' fill='%23f5ecd6'/></svg>",

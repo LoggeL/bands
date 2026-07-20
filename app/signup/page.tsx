@@ -49,7 +49,7 @@ export default function SignupPage() {
 
       <h1 className="serif text-[clamp(2.2rem,6.5vw,3rem)] leading-[0.95] font-medium tracking-tight">
         <span className="italic text-ember">dein</span>{' '}
-        <span className="marker">setlist</span>{' '}
+        <span className="marker">bands</span>{' '}
         <span className="italic opacity-80">starten.</span>
       </h1>
 

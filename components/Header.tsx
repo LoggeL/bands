@@ -48,7 +48,7 @@ export default function Header({
     <header className="rule-2 bg-paper sticky top-0 z-40 backdrop-blur-sm">
       <div className="max-w-5xl mx-auto px-4 py-3 flex items-center gap-3 flex-wrap">
         <Link href="/" className="shrink-0">
-          <span className="text-lg font-bold tracking-tight">setlist</span>
+          <span className="text-lg font-bold tracking-tight">bands</span>
         </Link>
 
         <nav className="flex items-center gap-1.5 flex-wrap flex-1">

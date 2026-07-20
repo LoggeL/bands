@@ -111,7 +111,7 @@ function LandingHero() {
       <div className="grid md:grid-cols-[1fr_auto] gap-8 items-end pt-4">
         <div>
           <h1 className="serif text-[clamp(3rem,9.2vw,6.4rem)] leading-[0.92] font-medium tracking-tight">
-            <span className="italic text-ember">setlist</span>
+            <span className="italic text-ember">bands</span>
             <span className="block mt-1 text-ink">
               halt fest, <span className="marker">was du gehört hast</span>.
             </span>

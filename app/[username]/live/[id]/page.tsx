@@ -37,7 +37,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { username, id } = await params;
   const data = await load(username, id);
-  if (!data) return { title: 'SETLIST' };
+  if (!data) return { title: 'BANDS' };
   return {
     title: `${data.event.artist_name} LIVE · @${data.owner.username}`,
     description: data.event.venue || `${data.owner.display_name || data.owner.username} hat ${data.event.artist_name} live gesehen.`,

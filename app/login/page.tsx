@@ -55,7 +55,7 @@ export default function LoginPage() {
             deine Ticketabrisse, deine Wiederholungen um drei Uhr morgens.&rdquo;
           </p>
           <p className="mt-2 mono text-[0.7rem] uppercase tracking-wider opacity-55">
-            — Liner Note, setlist
+            — Liner Note, bands
           </p>
 
           <div className="mt-8 flex items-center gap-5">
