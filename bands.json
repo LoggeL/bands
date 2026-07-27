@@ -33,6 +33,14 @@
       "preview": "previews/Broilers.mp3?v=1774311427"
     },
     {
+      "name": "Bruchbude",
+      "genre": "Punk",
+      "deezer": "0Fp9pg7U4Rwq8nYup2wxig",
+      "img": "https://cdn-images.dzcdn.net/images/artist/ca9d8beeec00711509dda496875174ee/250x250-000000-80-0-0.jpg",
+      "trackTitle": "abgefucked",
+      "preview": "previews/Bruchbude.mp3?v=1774311427"
+    },
+    {
       "name": "Casper",
       "genre": "Deutschrap/Rock",
       "deezer": "1GhPHrq36VKCY3ucVaZCfo",
@@ -101,6 +109,13 @@
       "img": "https://cdn-images.dzcdn.net/images/artist/88d539e6a46c2fe9c76ea6800174e8a5/250x250-000000-80-0-0.jpg",
       "trackTitle": "Schön genug",
       "preview": "previews/Haller.mp3?v=1774311427"
+    },
+    {
+      "name": "HBZ",
+      "genre": "Electronic / Dance",
+      "img": "https://cdn-images.dzcdn.net/images/artist/47f7b8da984728fb0a8c86c0c23aa89b/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Erinner mich",
+      "preview": "previews/hbz.mp3?v=1775252380"
     },
     {
       "name": "Jack Pott",
@@ -172,6 +187,13 @@
       "preview": "previews/Marlo-Grosshardt.mp3?v=1774568683"
     },
     {
+      "name": "Massendefekt",
+      "genre": "Punk Rock",
+      "img": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/ca/ce/5a/cace5a98-d646-044a-2071-a07f44599c46/190295168858.jpg/250x250bb.jpg",
+      "trackTitle": "Autopiloten",
+      "preview": "previews/Massendefekt.mp3?v=1785155100"
+    },
+    {
       "name": "Moonkid",
       "genre": "Indie",
       "img": "https://cdn-images.dzcdn.net/images/artist/4284d7479fea6b1a05a30ab30e6aca20/250x250-000000-80-0-0.jpg",
@@ -241,28 +263,6 @@
       "img": "https://cdn-images.dzcdn.net/images/artist/ab3526a996738e1b856d4f14a5263744/250x250-000000-80-0-0.jpg",
       "trackTitle": "Wenn Fynn Kliemann alles kann",
       "preview": "previews/Zirkel.mp3?v=1774311427"
-    },
-    {
-      "name": "HBZ",
-      "genre": "Electronic / Dance",
-      "img": "https://cdn-images.dzcdn.net/images/artist/47f7b8da984728fb0a8c86c0c23aa89b/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Erinner mich",
-      "preview": "previews/hbz.mp3?v=1775252380"
-    },
-    {
-      "name": "Bruchbude",
-      "genre": "Punk",
-      "deezer": "0Fp9pg7U4Rwq8nYup2wxig",
-      "img": "https://cdn-images.dzcdn.net/images/artist/ca9d8beeec00711509dda496875174ee/250x250-000000-80-0-0.jpg",
-      "trackTitle": "abgefucked",
-      "preview": "previews/Bruchbude.mp3?v=1774311427"
-    },
-    {
-      "name": "Massendefekt",
-      "genre": "Punk Rock",
-      "img": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/ca/ce/5a/cace5a98-d646-044a-2071-a07f44599c46/190295168858.jpg/250x250bb.jpg",
-      "trackTitle": "Autopiloten",
-      "preview": "previews/Massendefekt.mp3?v=1785155100"
     }
   ],
   "seen": [
