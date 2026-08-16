@@ -85,14 +85,6 @@
       "preview": "previews/Farber.mp3?v=1774311427"
     },
     {
-      "name": "Feine Sahne Fischfilet",
-      "genre": "Punk",
-      "deezer": "6FHkdSjZJiKSkdCtNRMDwj",
-      "img": "https://cdn-images.dzcdn.net/images/artist/b72967bf4b539d8d45fd6d717742c54d/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Komplett im Arsch",
-      "preview": "previews/Feine-Sahne-Fischfilet.mp3?v=1774311427"
-    },
-    {
       "name": "Focus.",
       "genre": "Punk",
       "deezer": "0pDqdJxqAkGWfl3YZ6QHIR",
@@ -176,15 +168,6 @@
       "img": "https://cdn-images.dzcdn.net/images/artist/5225599dc93353934d42feb3d6c67f60/250x250-000000-80-0-0.jpg",
       "trackTitle": "Kommst du mit?",
       "preview": "previews/Liedfett.mp3?v=1774311427"
-    },
-    {
-      "name": "Lumpenpack",
-      "genre": "Comedy/Musik",
-      "deezer": "2K6bdgBDhulVNz0JWYRwFO",
-      "track": "Ketamin",
-      "img": "https://cdn-images.dzcdn.net/images/artist/91edf179d12f90ccb8a28d5128916ffa/250x250-000000-80-0-0.jpg",
-      "trackTitle": "Ford Fiesta",
-      "preview": "previews/Lumpenpack.mp3?v=1774568230"
     },
     {
       "name": "Marlo Grosshardt",
@@ -642,6 +625,25 @@
       "trackTitle": "Komplett Blau",
       "preview": "previews/PA69.mp3?v=1774568683",
       "note": "Stagetopia · 13.06.2026"
+    },
+    {
+      "name": "Lumpenpack",
+      "genre": "Comedy/Musik",
+      "deezer": "2K6bdgBDhulVNz0JWYRwFO",
+      "track": "Kruppstahl, Baby",
+      "img": "https://cdn-images.dzcdn.net/images/artist/91edf179d12f90ccb8a28d5128916ffa/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Kruppstahl, Baby",
+      "preview": "previews/Lumpenpack.mp3?v=1786892457",
+      "note": "Highfield, 2026"
+    },
+    {
+      "name": "Feine Sahne Fischfilet",
+      "genre": "Punk",
+      "deezer": "6FHkdSjZJiKSkdCtNRMDwj",
+      "img": "https://cdn-images.dzcdn.net/images/artist/b72967bf4b539d8d45fd6d717742c54d/250x250-000000-80-0-0.jpg",
+      "trackTitle": "Komplett im Arsch",
+      "preview": "previews/Feine-Sahne-Fischfilet.mp3?v=1774311427",
+      "note": "Highfield, 2026"
     }
   ]
 }
